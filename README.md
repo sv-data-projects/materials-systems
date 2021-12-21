@@ -1,4 +1,5 @@
-# materials-systems
+# about these materials systems visualisations
+
 This project explores a narrative-based interactive visual describing material flow systems. It is being  managed by Florian van den Corput @ SV over Dec-21 to Jan 22
 
 - Initial protoyping is based on a 1-2 materials (to be orgranised into folders by material name and eventurally navigated to from a content page:

@@ -1,0 +1,127 @@
+
+/*****************************************************/
+/***   MATERIALS SYSTEM VISUALISATION STYLESHEET   ***/
+/***   -----------------------------------------   ***/
+
+
+
+/*** Core styling ***/
+body, 
+svg text{
+    font-family: 'DIN Next LT Pro';
+    color: var(--xCharcoal);
+    margin: 0;
+}
+h1{ 
+    text-transform: uppercase;
+    font-size: 5vw;
+    margin-block-start: 0.25rem;
+    margin-block-end: 0;
+}
+h2.sub-title{
+    font-size: 2vw;
+    font-weight: 300;
+    margin-block-end: 0;
+}
+h3.narrative-title{
+    font-size: 1.5vw;
+}
+.narrative{
+    font-weight: 300;
+    font-size: 1vw;
+}
+.link-label{
+    cursor: pointer;
+}
+/*** HTML page layout: default landscape ***/
+.main-container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto 1fr;
+    grid-column-gap: 0vw;
+    max-height: 100vh;
+    overflow: hidden;
+}
+.title-pane, .narrative-pane{
+    margin: 1vw;
+    margin-left: 3vw;
+}
+.title-pane{
+    grid-area: 1 / 1 / 2 / 2; 
+}
+.narrative-pane{
+    grid-area: 2 / 1 / 3 / 2; 
+}
+.vis-pane{
+    grid-area: 1 / 2 / 3 / 3;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+.svg-vis{
+    max-height: 100vh;
+    max-width: 75vw;
+}
+
+
+
+
+/* Node styling */
+
+.node-box{
+    cursor:         pointer;
+    pointer-events: bounding-box;
+    fill:           transparent;
+    stroke:          #000;
+    stroke-width:   2px;
+}
+
+.node-box:hover{
+    fill: rgba(0, 0, 0, 0.25)
+}
+.node-label{
+    text-anchor:    middle;
+    font-size:      20px;
+    pointer-events: none;
+}
+
+/* Link styling */
+.link-label{
+    font-family:    'DIN Next LT Pro';
+    font-size:      14px;
+    font-weight:    300;
+}
+.link{
+    cursor: pointer;
+}
+.link.line{
+    fill:               none;
+    stroke:             var(--xCharcoal);
+    stroke-dasharray:   6px 6px;
+    stroke-width:       2px;
+    stroke-linecap:     round;
+}
+.arrowhead{
+    fill: var(--xCharcoal);
+}
+
+.constituent-material{
+    fill: #d1d3d4;
+}
+.constituent-material.input{
+    fill: #bcbec0;
+}
+.passenger-tyres{
+    fill: #6e5a7a;
+}
+.truck-tyres{
+    fill: #b56576;
+}
+.off-road-tyres{
+    fill: #e56a6f;
+}
+
+/*** Material specific styling ****/
+
+
+/**** Tyres ***/

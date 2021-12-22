@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Materials system: Tyres</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/core.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.js" integrity="sha512-cJ7aOLpXbec1Km9craM6xL6UOdlWf9etIz7f+cwQv2tuarLm3PLb3dv3ZqIK++SE4ui+EE0nWqKB0dOaAOv9gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+    </head>
+    <body>
+        <section class = "main-container">
+            <div class = "title-pane">
+                <h2 class = "sub-title">material system flow</h2>
+                <h1 class = "main-title">Tyres</h1>
+            </div>
+            <div class = "narrative-pane">
+                <h3 class = "narrative-title"> about this visualisation</h3> 
+                <div class = "narrative">
+                    Though I'm past one hundred thousand miles
+                    I'm feeling very still
+                    And I think my spaceship knows which way to go
+                    Tell my wife I love her very much she knows
+                    Ground Control to Major Tom
+                    Your circuit's dead, there's something wrong
+                    Can you hear me, Major Tom?
+                    Can you hear me, Major Tom?
+                    Can you hear me, Major Tom?
+                    Can you "Here am I floating 'round my tin can
+                </div>
+                <h3 class = "narrative-title"> navigation...</h3> 
+                <div class = "narrative">
+                    Though I'm past one hundred thousand miles
+                    I'm feeling very still
+                    And I think my spaceship knows which way to go
+                    Tell my wife I love her very much she knows
+                    Ground Control to Major Tom
+                    Your circuit's dead, there's something wrong
+                    Can you hear me, Major Tom?
+                    Can you hear me, Major Tom?
+                    Can you hear me, Major Tom?
+                    Can you "Here am I floating 'round my tin can
+                </div>
+            </div>
+            <div class = "vis-pane">
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" id="tyres-system" class="systems-vis" version="1.1" viewBox="0 0 2500 2500">
+                    <g id="group-flow-paths">
+                        <g id="flow-group_overseas-markets-products">
+                            <path id="flow-shape_overseas-markets-products_pt" fill="#6e5a7a" d="M1522.36 739.927c0-119.42 96.81-216.23 216.23-216.23h46.19v116.22h-46.19c-55.23 0-100.01 44.77-100.01 100.01v37.26l-116.22 49.43v-86.69"/>
+                            <path id="flow-shape_overseas-markets-products_tt" fill="#b56576" d="M1738.59 421.657h46.19v102.05h-46.19c-119.42 0-216.23 96.81-216.23 216.23v86.69l-25.5 10.85-76.54-32.55v-65.1c0-175.72 142.45-318.16 318.16-318.16h.11z"/>
+                            <path id="flow-shape_overseas-markets-products_ot" fill="#e56a6f" d="M1355.12 777.187v-37.26c0-211.79 171.69-383.47 383.47-383.47h46.19v65.2h-46.3c-175.72 0-318.16 142.45-318.16 318.16v65.1z"/>
+                        </g>
+                        <g id="flow-group-overseas-markets-materials">
+                            <g id="flow-group_steel">
+                                <path id="flow-shape_steel" fill="#d1d3d4" d="M2464.1 358.477v-105.24h-51.02v105.24c0 134.68-109.18 243.86-243.86 243.86h-121.91l32.24 51.02h89.67c162.86 0 294.88-132.02 294.88-294.88z"/>
+                                <text id="flow-label_steel" x="2129.9" y="632.634" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Steel</text>
+                            </g>
+                            <g id="flow-group_carbon-black">
+                                <path id="flow-shape_carbon-black" fill="#bcbec0" d="M2408.08 358.477v-105.24h-62.36v105.24c0 100.24-81.26 181.5-181.5 181.5H2007.9l39.41 62.36h116.91c134.68 0 243.86-109.18 243.86-243.86z"/>
+                                <text id="flow-label_carbon-black" x="2092.51" y="575.878" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Carbon black</text>
+                            </g>
+                            <g id="flow-group_silica">
+                                <path id="flow-shape_silica" fill="#d1d3d4" d="M2340.71 358.477v-105.24h-17.01v105.24c0 90.84-73.64 164.49-164.49 164.49h-162.06l10.75 17.01h151.32c100.23 0 181.49-81.26 181.49-181.5z"/>
+                                <text id="flow-label_silica" x="2129.03" y="533.761" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Silica</text>
+                            </g>
+                            <g id="flow-group_nylon">
+                                <path id="flow-shape_nylon" fill="#bcbec0" d="M2318.71 358.477v-105.24h-4.25v105.24c0 88.5-71.74 160.24-160.24 160.24h-159.75l2.69 4.25h157.06c90.84 0 164.49-73.64 164.49-164.49z"/>
+                            </g>
+                            <g id="flow-group_zinc-oxide">
+                                <path id="flow-shape_zinc-oxide" fill="#bcbec0" d="M2300.2 358.477v-105.24h-4.25v105.24c0 83.8-67.93 151.73-151.73 151.73h-154.23l-.45.71 2.24 3.54h152.44c86.14.01 155.98-69.83 155.98-155.98z"/>
+                            </g>
+                            <g id="flow-group_sulphur-and-other-additives">
+                                <path id="flow-shape_sulphur-and-other-additives" fill="#d1d3d4" d="M2290.95 358.477v-105.24h-31.18v105.24c0 66.58-53.98 120.56-120.56 120.56h-129.5l-19.72 31.18h149.23c83.8 0 151.73-67.94 151.73-151.74z"/>
+                                <text id="flow-label_sulphur-and-other-additives" x="2026.68" y="497.813" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Sulphur and other additives</text>
+                            </g>
+                            <g id="flow-group_polyester">
+                                <path id="flow-shape_polyester" fill="#d1d3d4" d="M2309.45 358.477v-105.24h-4.25v105.24c0 86.15-69.84 155.98-155.98 155.98h-157.44l2.69 4.25h154.75c88.49.01 160.23-71.73 160.23-160.23z"/>
+                                <text id="flow-label_polyester" x="2031.4" y="518.714" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Zinc oxide, polyester, nylon</text>
+                            </g>
+                            <g id="flow-group_natural-rubber">
+                                <path id="flow-shape_natural-rubber" fill="#bcbec0" d="M2254.77 358.477v-105.24h-31.18v105.24c0 49.36-40.02 89.38-89.38 89.38H2029.4l-19.69 31.18h124.5c66.58 0 120.56-53.98 120.56-120.56z"/>
+                                <text id="flow-label_natural-rubber" x="2085.34" y="468.362" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Natural rubber</text>
+                            </g>
+                            <g id="flow-group_synthetic-rubber">
+                                <path id="flow-shape_synthetic-rubber" fill="#d1d3d4" d="M2218.29 358.477v-105.24h-79.37v105.25c0 5.52-4.48 10-10 10h-49.37l-50.15 79.37h99.52c49.36 0 89.37-40.01 89.37-89.38z"/>
+                                <text id="flow-label_synthetic-rubber" x="2076.18" y="404.638" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500">Synthetic rubber</text>
+                            </g>
+                        </g>
+                        <g id="flow-group_feedstock-logistics">
+                            <path id="flow-shape_feedstock-logistics_cm" fill="#d1d3d4" d="M1171.81 504.047h-72.32v-19.28h72.27c99.13 0 179.48-80.36 179.48-179.48v-41.81l9.71-13.37 9.68 13.37v41.75c0 109.8-89.01 198.82-198.82 198.82z"/>
+                            <g id="flow-label_feedstock-logistics" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500">
+                                <text id="text149" transform="translate(1241.3 402.423)">Feedstock</text>
+                                <text id="text151" x="1241.3" y="414.423">logistics</text>
+                            </g>
+                        </g>
+                        <g id="flow-group_resource-logistics">
+                            <g id="flow-label_resource-logistics" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500">
+                                <text id="text367" transform="translate(1007.11 333.622)">Resource</text>
+                                <text id="text369" x="1007.11" y="345.622">logistics</text>
+                            </g>
+                            <path id="line_resource-logistics" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M997.11 251.047v157.98"/>
+                            <path id="arrowhead_resource-logistics" d="m992.12 407.567 4.99 8.63 4.98-8.63z"/>
+                        </g>
+                        <g id="flow-group_feedstock-logistics-in">
+                            <g id="flow-label_feedstock-logistics-in" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500">
+                                <text id="text375" transform="translate(1007.11 652.927)">Feedstock</text>
+                                <text id="text377" x="1007.11" y="664.927">logistics</text>
+                            </g>
+                            <path id="line_feedstock-logistics-in" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M997.11 570.347v157.98"/>
+                            <path id="arrowhead_feedstock-logistics-in" d="m992.12 726.867 4.99 8.64 4.98-8.64z"/>
+                        </g>
+                        <g id="flow-group_retail-logistics">
+                            <g id="flow-label_retail-logistics">
+                                <text id="text383" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1099.33 787.177)">Retail</text>
+                                <g id="g387">
+                                <text id="text385" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1099.33 799.177)">logistics</text>
+                                </g>
+                            </g>
+                            <path id="line_retail-logistics" fill="none" stroke="#000" stroke-dasharray="3.99 3.99" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="m1100.817 809.246 207.143-.359c104.48-.181 189.18 84.7 189.18 189.18v41.61"/>
+                            <path id="arrowhead_retail-logistics" d="m1492.15 1042.217 4.99 8.63 4.98-8.63z"/>
+                        </g>
+                        <g id="flow-group_export">
+                            <path id="flow-shape_export_pt" fill="#6e5a7a" d="M514.81 2035.797h-82.77v32.77c0 67.89-55.03 122.92-122.92 122.92h-58.45l-40 66.26 9.96 16.5h88.49c113.6 0 205.68-92.09 205.68-205.68v-32.77z"/>
+                            <path id="flow-shape_export_ot" fill="#e56a6f" d="M564.56 2035.787h-5.85v32.79c0 137.84-111.74 249.58-249.58 249.58h-61.99l3.53 5.85h58.45c141.07 0 255.44-114.36 255.44-255.44z"/>
+                            <path id="flow-shape_export_tt" fill="#b56576" d="M247.14 2318.157h61.99c137.84 0 249.59-111.74 249.59-249.59v-32.78h-43.91v32.77c0 113.6-92.09 205.68-205.68 205.68h-88.49z"/>
+                            <g id="flow-label_export">
+                                <text id="text403" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(254.583 2179.9)">Export</text>
+                            </g>
+                        </g>
+                        <g id="flow-group_lost-damages-or-unused-stock">
+                            <g id="flow-label_lost-damages-or-unused-stock">
+                                <text id="text407" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1599.52 1122.39)">Lost, damaged or unsold stock</text>
+                            </g>
+                            <path id="line_lost-damages-or-unused-stock" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" d="M1599.52 1132.387h218.08"/>
+                            <path id="arrowhead_lost-damages-or-unused-stock" d="m1816.14 1137.377 8.64-4.99-8.64-4.98z"/>
+                        </g>
+                        <g id="flow-group_degradation">
+                            <g id="flow-label_degradation">
+                                <text id="text411" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1599.52 1662.3)">Degradation</text>
+                            </g>
+                            <path id="flow-shape_degradation_cm" fill="#d1d3d4" d="m1804.78 1672.297 20 21.26-20 21.26h-205.26v-42.52z"/>
+                        </g>
+                        <g id="flow-group_littering-and-dumping">
+                            <g id="flow-label_littering-and-dumping" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500">
+                                <text id="text415" transform="translate(1032.67 2299.43)">Littering and</text>
+                                <text id="text417" x="1032.67" y="2311.43">dumping</text>
+                            </g>
+                            <path id="flow-shape_littering-and-dumping_tt" fill="#b56576" d="M973.76 2320.347v-227.48h-3.98v224.68z"/>
+                            <path id="flow-shape_littering-and-dumping_ot" fill="#e56a6f" d="m997.11 2336.897-23.35-16.55v-227.48h51.78v223.9z"/>
+                            <path id="flow-shape_littering-and-dumping_pt" fill="#6e5a7a" d="M969.78 2317.547v-224.68h-1.11v223.9z"/>
+                        </g>
+                        <g id="flow-group_collection-and-sorting">
+                            <g id="flow-label_collection-and-sorting">
+                                <text id="text423" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(701.644 1986.07)">Collection &amp; sorting</text>
+                            </g>
+                            <path id="flow-shape_collection-and-sorting_ot" fill="#e56a6f" d="M477.67 1828.637c0 113.9 92.33 206.24 206.23 206.24h210.82v-3.05H683.9c-112.22 0-203.18-90.97-203.18-203.19v-40.87l-3.05 2.56z"/>
+                            <path id="flow-shape_collection-and-sorting_pt" fill="#6e5a7a" d="M894.73 2010.757v-14.04H683.91c-92.83 0-168.08-75.25-168.08-168.08v-38.31l-14.04-11.77v50.09c0 100.58 81.54 182.12 182.12 182.12z"/>
+                            <path id="flow-shape_collection-and-sorting_tt" fill="#b56576" d="M480.72 1828.637c0 112.22 90.97 203.19 203.18 203.19h210.82v-21.07H683.9c-100.58 0-182.12-81.54-182.12-182.12v-50.09l-5.04-4.23-16.02 13.44z"/>
+                        </g>
+                        <g id="flow-group_waste-processing">
+                            <g id="flow-label_waste-processing" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500">
+                                <text id="text427" transform="translate(516.756 1414.82)">Waste processing</text>
+                                <text id="text429" x="516.756" y="1426.82">(shredding, granulation,</text>
+                                <text id="text433" x="516.756" y="1438.82">milling)</text>
+                            </g>
+                            <path id="flow-shape_waste-processing_cm" fill="#d1d3d4" d="M487.06 1620.177h19.39v-396.71l-9.71-14-9.68 14z"/>
+                        </g>
+                        <g id="flow-group_sales">
+                            <g id="flow-label_sales">
+                                <text id="text439" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1647.08 1414.82)">Sales</text>
+                            </g>
+                            <path id="flow-shape_sales_pt" fill="#6e5a7a" d="M1355.28 1207.967v351.41l116.22 49.43v-400.84z"/>
+                            <path id="flow-shape_sales_tt" fill="#b56576" d="M1471.5 1207.967v400.84l25.5 10.85 76.55-32.55v-379.25z"/>
+                            <path id="flow-shape_sales_ot" fill="#e56a6f" d="M1573.55 1207.857v379.25l65.19-27.73v-351.41z"/>
+                        </g>
+                        <g id="flow-group_landfill" fill-rule="nonzero">
+                            <g id="flow-label_landfill">
+                                <text id="text443" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(214.67 1674.52)">Landﬁll</text>
+                            </g>
+                            <path id="flow-shape_landfill_pt" fill="#6e5a7a" d="M394.38 1684.517H228.13l-15 9.04 15 9.04h166.25z"/>
+                            <path id="flow-shape_landfill_ot" fill="#e56a6f" d="M394.38 1684.517H228.13l-3.6 2.17h169.85z"/>
+                            <path id="flow-shape_landfill_tt" fill="#b56576" d="M394.38 1686.687H224.53l-10.42 6.33h180.27z"/>
+                        </g>
+                        <g id="flow-group_recovery-inefficiencies">
+                            <g id="flow-label_recovery-inefficiencies">
+                                <text id="text447" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(214.67 1116.39)">Recovery ineﬃciencies</text>
+                            </g>
+                            <path id="line_recovery-inefficiencies" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M394.38 1132.387H220.31"/>
+                            <path id="arrowhead_recovery-inefficiencies" d="m221.77 1127.407-8.64 4.98 8.64 4.99z"/>
+                        </g>
+                        <g id="flow-group_use">
+                            <g id="flow-label_use">
+                                <text id="text451" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1201.46 2177.19)">Use</text>
+                            </g>
+                            <path id="flow-shape_use_ot" fill="#b56576" d="M1444.74 1774.197v52.42c0 49.79-40.36 90.15-90.15 90.15h-203.26l-52 120.47 52 120.47h203.26c182.86 0 331.1-148.24 331.1-331.1v-52.41z"/>
+                            <path id="flow-shape_use_tt" fill="#e56a6f" d="M1625.45 1774.207v52.41c0 149.59-121.27 270.86-270.86 270.86h-229.26l26 60.24h203.26c182.86 0 331.1-148.24 331.1-331.1v-52.41z"/>
+                            <path id="flow-shape_use_pt" fill="#6e5a7a" d="M1108.69 2015.797h245.66c104.48 0 189.18-84.7 189.18-189.18v-52.18h-98.79v52.18c0 49.92-40.47 90.39-90.39 90.39h-203.02z"/>
+                        </g>
+                        <g id="flow-group_reuse">
+                            <g id="flow-label_reuse">
+                                <text id="text455" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1201.46 1814.07)">Reuse</text>
+                            </g>
+                            <path id="line_reuse" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M1425.09 1774.327v36.71c0 46.27-37.51 83.78-83.78 83.78h-75.39c-46.27 0-83.78-37.51-83.78-83.78s37.51-83.78 83.78-83.78h121.83"/>
+                            <path id="arrowhead_reuse" d="m1386.29 1732.237 8.63-4.99-8.63-4.98z"/>
+                        </g>
+                        <g id="flow-group_repair">
+                            <g id="flow-label_repair">
+                                <text id="text459" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(1047.58 1846.94)">Repair</text>
+                            </g>
+                            <path id="line_repair" fill="none" stroke="#000" stroke-dasharray="4.01 4.01" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M1381.74 1697.247H1216.3c-104.48 0-189.18 84.7-189.18 189.18v48.77"/>
+                            <path id="arrow_repair" fill-rule="nonzero" d="m1386.29 1692.257 8.63 4.99-8.63 4.99z"/>
+                        </g>
+                        <g id="flow-group_refrubishment-retreading">
+                            <g id="flow-label_refrubishment-retreading" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500">
+                                <text id="text463" transform="translate(1069.5 1234.11)">Refurbishment</text>
+                                <text id="text465" x="1069.5" y="1246.11">(retreading)</text>
+                            </g>
+                            <path id="flow-shape_refrubishment-retreading_pt" fill="#6e5a7a" d="M989.88 1321.567v617.64h14.46v-617.64c0-100.49 81.46-181.95 181.95-181.95h197.64l11-7.23-11-7.23h-197.64c-108.48 0-196.41 87.94-196.41 196.41z"/>
+                            <path id="flow-shape_refrubishment-retreading_tt" fill="#b56576" d="M989.88 1321.567v617.64h13.59v-617.64c0-100.97 81.85-182.82 182.82-182.82h198.96l9.68-6.36-11-7.23h-197.64c-108.48 0-196.41 87.94-196.41 196.41z"/>
+                        </g>
+                        <g id="flow-group_remanufacturing">
+                            <g id="flow-label_remanufacturing">
+                                <text id="text471" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(976.946 947.679)">Remanufacturing</text>
+                            </g>
+                            <path id="line_remanufacturing" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M966.94 1939.207V896.827"/>
+                            <path id="arrowhead_remanufacturing" d="m971.93 898.287-4.99-8.63-4.98 8.63z"/>
+                        </g>
+                        <g id="flow-group_recycling">
+                            <g id="flow-label_recycling">
+                                <text id="text543" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(703.324 840.177)">Recycling</text>
+                            </g>
+                            <path id="line_recycling" fill="none" stroke="#000" stroke-dasharray="4.02 4.02" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M881.53 810.357H731.1c-104.48 0-189.18 84.7-189.18 189.18v52.89"/>
+                            <path id="arrowhead_recycling" d="m886.09 805.367 8.64 4.99-8.64 4.98z"/>
+                        </g>
+                        <g id="flow-group_down-cycling">
+                            <g id="flow-label_down-cycling">
+                                <text id="text547" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(703.325 523.703)">Down-cycling</text>
+                            </g>
+                            <path id="flow-shape_down-cycling_cm" fill="#d1d3d4" d="M502.28 683.867v368.88h19.28v-368.83c0-99.13 80.36-179.48 179.48-179.48h180.05l13.37-9.71-13.37-9.68H701.1c-109.8 0-198.82 89.01-198.82 198.82z"/>
+                        </g>
+                        <g id="flow-group_waste-to-energy">
+                            <g id="flow-label_waste-to-energy">
+                                <text id="text551" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="10" font-weight="500" transform="translate(214.67 515.071)">Waste-to-energy</text>
+                            </g>
+                            <path id="line_waste-to-energy" fill="none" stroke="#000" stroke-dasharray="3.98 3.98" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M220.266 494.737h72.304c104.48 0 189.148 84.7 189.18 189.18l.113 368.463"/>
+                            <path id="arrowhead_waste-to-energy" d="m219.31 499.727-8.64-4.99 8.64-4.98z"/>
+                        </g>
+                    </g>
+                    <g id="group-nodes">
+
+                        <g id="node-group_other-industry-sectors">
+                            <g id="node-label_other-industry-sectors" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text125" transform="translate(1316.16 170.108)">Other industry</text>
+                                <text id="text127" x="1339.12" y="184.508">sectors</text>
+                            </g>
+                            <path id="node-box_other-industry-sectors" fill="none" stroke="#000" stroke-width="2" d="M1289.07 210.387v-73.18c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49h-123.79c-5.79 0-10.49-4.69-10.49-10.48z"/>
+                        </g>
+                        <g id="node-group_overseas-markets-materials">
+                            <g id="node-label_overseas-markets-materials" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text137" transform="translate(2271.87 170.108)">Overseas</text>
+                                <text id="text139" x="2274.53" y="184.508">markets</text>
+                            </g>
+                            <path id="node-box_overseas-markets-materials" fill="none" stroke="#000" stroke-width="2" d="M2227.82 210.387v-73.18c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49h-123.79c-5.8 0-10.49-4.69-10.49-10.48z"/>
+                        </g>
+                        <g id="node-group_product-manufacturing">
+                            <g id="node-label_product-manufacturing" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text157" transform="translate(972.12 808.89)">Product</text>
+                                <text id="text159" x="950.45" y="823.29">manufacturing</text>
+                            </g>
+                            <path id="node-box_product-manufacturing" fill="none" stroke="#000" stroke-width="2" d="M924.73 849.167v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H935.22c-5.8-.01-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_feedstock-production">
+                            <g id="node-label_feedstock-production" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text169" transform="translate(964.89 489.585)">Feedstock</text>
+                                <text id="text171" x="962.65" y="503.985">production</text>
+                            </g>
+                            <path id="node-box_feedstock-production" fill="none" stroke="#000" stroke-width="2" d="M924.73 529.857v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H935.22c-5.8 0-10.49-4.69-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_resource-extraction">
+                            <g id="node-label_resource-extraction">
+                                <text id="text181" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500" transform="translate(968.21 170.28)">Resource</text>
+                                <g id="g185">
+                                <text id="text183" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500" transform="translate(965.49 184.68)">extraction</text>
+                                </g>
+                            </g>
+                            <path id="node-box_resource-extraction" fill="none" stroke="#000" stroke-width="2" d="M924.73 210.557v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H935.22c-5.8 0-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_overseas-markets-products">
+                            <g id="node-label_overseas-markets-products" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text193" transform="translate(1858.83 508.286)">Overseas</text>
+                                <text id="text195" x="1861.49" y="522.686">markets</text>
+                            </g>
+                            <path id="node-box_overseas-markets-products" fill="none" stroke="#000" stroke-width="2" d="M1814.78 548.557v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49h-123.79c-5.8 0-10.49-4.69-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_product-end-of-life">
+                            <g id="node-label_product-end-of-life" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text205" transform="translate(972.12 2012.107)">Product</text>
+                                <text id="text207" x="965.02" y="2026.507">end-of-life</text>
+                            </g>
+                            <path id="node-box_product-end-of-life" fill="none" stroke="#000" stroke-width="2" d="M924.73 2052.387v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H935.22c-5.8-.01-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_waste-management">
+                            <g id="node-label_waste-management" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text217" transform="translate(476.88 1693.557)">Waste</text>
+                                <text id="text219" x="454.44" y="1707.957">management</text>
+                            </g>
+                            <path id="node-box_waste-management" fill="none" stroke="#000" stroke-width="2" d="M424.38 1733.837v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.78c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H434.87c-5.8-.01-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_product-stock-in-use">
+                            <g id="node-label_product-stock-in-use" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text229" transform="translate(1453.69 1693.557)">Product stock</text>
+                                <text id="text231" x="1478.07" y="1707.957">in-use</text>
+                            </g>
+                            <path id="node-box_product-stock-in-use" fill="none" stroke="#000" stroke-width="2" d="M1424.77 1733.837v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.78c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49h-123.78c-5.8-.01-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_material-recovery">
+                            <g id="node-label_material-recovery" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text241" transform="translate(471.47 1128.697)">Material</text>
+                                <text id="text243" x="469.95" y="1143.097">recovery</text>
+                            </g>
+                            <path id="node-box_material-recovery" fill="none" stroke="#000" stroke-width="2" d="M424.38 1168.977v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.78c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H434.87c-5.8 0-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_product-retail">
+                            <g id="node-label_product-retail" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text253" transform="translate(1472.16 1128.697)">Product</text>
+                                <text id="text255" x="1481.24" y="1143.097">retail</text>
+                            </g>
+                            <path id="node-box_product-retail" fill="none" stroke="#000" stroke-width="2" d="M1424.77 1168.977v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.78c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49h-123.78c-5.8 0-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_overseas-markets-export">
+                            <g id="node-label_overseas-markets-export" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text391" transform="translate(79.95 2254.067)">Overseas</text>
+                                <text id="text393" x="82.61" y="2268.467">markets</text>
+                            </g>
+                            <path id="node-box_overseas-markets-export" fill="none" stroke="#000" stroke-width="2" d="M35.9 2294.347v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H46.39c-5.79-.01-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                        <g id="node-group_energy-recovery">
+                            <g id="node-label_energy-recovery" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500">
+                                <text id="text503" transform="translate(86.27 491.05)">Energy</text>
+                                <text id="text505" x="81.49" y="505.45">recovery</text>
+                            </g>
+                            <path id="node-box_energy-recovery" fill="none" stroke="#000" stroke-width="2" d="M35.9 531.327v-73.17c0-5.79 4.69-10.49 10.49-10.49h123.79c5.79 0 10.49 4.69 10.49 10.49v73.17c0 5.79-4.69 10.49-10.49 10.49H46.39c-5.79 0-10.49-4.7-10.49-10.49z"/>
+                        </g>
+                    </g>
+
+                    <g id="group-legend" display="inline">
+                        <g id="g561" transform="translate(-4466.56 120.21)">
+                        <text id="text555" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="14" font-weight="500" transform="translate(6594.9 1992.7)">AUSTRALIAN CIRCULAR TYRE SYSTEM</text>
+                        <g id="g559">
+                            <text id="text557" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="14" font-weight="500" transform="translate(6685 2009.5)">(BASED ON 2018/19 DATA)</text>
+                        </g>
+                        </g>
+                        <g id="g569" transform="translate(-4466.56 120.21)">
+                        <text id="text563" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6760.09 2067.63)">Passenger tyres</text>
+                        <g id="g567">
+                            <text id="text565" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6715.4 2078.43)">(Tyres for private vehicles)</text>
+                        </g>
+                        </g>
+                        <g id="g573" transform="translate(-4466.56 120.21)">
+                        <text id="text571" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6732.3 2202.71)">Constituent materials</text>
+                        </g>
+                        <g id="g581" transform="translate(-4466.56 120.21)">
+                        <text id="text575" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6714.84 2240.54)">Unknown or non-existent</text>
+                        <g id="g579">
+                            <text id="text577" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6701.2 2251.34)">ﬂow of products or materials</text>
+                        </g>
+                        </g>
+                        <g id="g589" transform="translate(-4466.56 120.21)">
+                        <text id="text583" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6779.78 2110.86)">Truck tyres</text>
+                        <g id="g587">
+                            <text id="text585" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6690.41 2121.66)">(Tyres for commercial vehicles)</text>
+                        </g>
+                        </g>
+                        <g id="g597" transform="translate(-4466.56 120.21)">
+                        <text id="text591" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6721.24 2154.09)">Oﬀ-the-road (OTR) tyres</text>
+                        <g id="g595">
+                            <text id="text593" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="9" font-weight="500" transform="translate(6581.91 2164.89)">(Tyres for mining sites and heavy industry applications)</text>
+                        </g>
+                        </g>
+                        <circle id="circle599" cx="2393" cy="2189.43" r="18.97" fill="#6e5a7a"/>
+                        <circle id="circle601" cx="2393" cy="2232.58" r="18.97" fill="#b56576"/>
+                        <circle id="circle603" cx="2393" cy="2275.72" r="18.97" fill="#e56a6f"/>
+                        <circle id="circle605" cx="2393" cy="2318.86" r="18.97" fill="#d1d3d4"/>
+                        <g id="g615" transform="translate(-4466.56 120.21)">
+                        <g id="g613">
+                            <path id="path607" fill="none" stroke="#000" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" d="M6840.65 2241.79h30.63"/>
+                            <g id="g611">
+                            <path id="path609" fill-rule="nonzero" d="m6869.83 2246.78 8.63-4.99-8.63-4.99z"/>
+                            </g>
+                        </g>
+                        </g>
+                        <g id="g619" transform="translate(-4466.56 120.21)">
+                        <text id="text617" font-family="LucidaGrande, 'Lucida Grande', sans-serif" font-size="12" font-weight="500" transform="translate(6831.5 2035.86)">Legend</text>
+                        </g>
+                    </g>
+                </svg>
+
+
+            </div>
+
+        </section>
+
+
+
+        <script src="js/main.js" async defer></script>
+    </body>
+</html>

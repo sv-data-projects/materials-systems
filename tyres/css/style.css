@@ -2,7 +2,7 @@
 /*****************************************************/
 /***   MATERIALS SYSTEM VISUALISATION STYLESHEET   ***/
 /***   -----------------------------------------   ***/
-
+/*****************************************************/
 
 
 /*** Core styling ***/
@@ -16,21 +16,34 @@ h1{
     text-transform: uppercase;
     font-size: 5vw;
     margin-block-start: 0.25rem;
-    margin-block-end: 0;
 }
 h2.sub-title{
     font-size: 2vw;
     font-weight: 300;
+}
+h3.narrative-title,
+h3.navigation-title{
+    font-size: 1.5vw;
+    animation-duration: 250ms;
+}
+h1, h2, h3{ 
     margin-block-end: 0;
 }
-h3.narrative-title{
-    font-size: 1.5vw;
+.zero-opacity{
+    opacity: 0;
 }
-.narrative{
+.narrative, 
+.nav-item{
     font-weight: 300;
     font-size: 1vw;
+    line-height: 1.35;
+    animation-duration: 500ms;
 }
-.link-label{
+.nav-item.selected{
+    font-weight: 500;
+}
+.nav-item,
+.link-group{
     cursor: pointer;
 }
 /*** HTML page layout: default landscape ***/
@@ -67,18 +80,13 @@ h3.narrative-title{
 
 
 /* Node styling */
-
 .node-box{
     cursor:         pointer;
     pointer-events: bounding-box;
     fill:           transparent;
-    stroke:          #000;
     stroke-width:   2px;
 }
 
-.node-box:hover{
-    fill: rgba(0, 0, 0, 0.25)
-}
 .node-label{
     text-anchor:    middle;
     font-size:      20px;
@@ -87,28 +95,32 @@ h3.narrative-title{
 
 /* Link styling */
 .link-label{
-    font-family:    'DIN Next LT Pro';
     font-size:      14px;
     font-weight:    300;
 }
-.link{
-    cursor: pointer;
-}
+
 .link.line{
     fill:               none;
-    stroke:             var(--xCharcoal);
     stroke-dasharray:   6px 6px;
     stroke-width:       2px;
     stroke-linecap:     round;
 }
+/* Node link colours */
+.node-label,
+.link-label,
 .arrowhead{
-    fill: var(--xCharcoal);
+    fill:             var(--xCharcoal);
 }
+.node-box,
+.link.line{
+    stroke:             var(--xCharcoal);
+}
+
 
 .constituent-material{
     fill: #d1d3d4;
 }
-.constituent-material.input{
+.constituent-material.dark{
     fill: #bcbec0;
 }
 .passenger-tyres{

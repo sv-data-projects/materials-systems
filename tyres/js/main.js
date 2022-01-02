@@ -19,12 +19,14 @@ const settings = {           // Visualisation settings
     }, 
     animation: {
         sceneDuration:  1200,
-        fadeOpacity:    0.15,
+        fadeOpacity:    0.025,
     }
 }
 
 const data = {}         // Object to store loaded/parsed data
-const scene = {}        // Object to store scene data methods
+const scene = {         // Object to store scene element refenrences and data methods
+    els: {}
+}        
 const state = {         // Object to store application state
     scene:      ''          // SceneID set on load
 }
@@ -53,7 +55,7 @@ function buildFromGSheetData(settings) {
     }).then( async (data) => {
         // 3. Initiate vis build sequence with data now loaded
         await applyUserQuerySettings(settings)                                                   // a. Apply query string settings
-        await getSVGDims()    // b. Parse data
+        await getSVGData()                                                                      // b. Extract source SVG data
         await setupNodeLinkComponents(data[settings.material].nodes, data[settings.material].links)    // b. Parse data
         await setupScenes(data[settings.material].scenes)                                           // c. Render visualisation(s)
         await revealVis()                                                                   // c. Render visualisation(s)
@@ -85,27 +87,36 @@ async function applyUserQuerySettings(settings){
 
 
 // III. Extract SVG dimensions (for zoom and pan behaviour)
-async function getSVGDims(){
-    const viewBoxArray = JSON.parse(`[${d3.select(`#${settings.svgID}`).attr('viewBox').replaceAll(' ', ',')}]`)
+async function getSVGData(){
+    // 1.  Add SVG vis element reference
+    scene.els.svg = d3.select(`#${settings.svgID}`)
+    scene.els.svgLegend = d3.select(`#group-legend`)
+
+    // Extract svg dims from SVG viewBox
+    const viewBoxArray = JSON.parse(`[${scene.els.svg.attr('viewBox').replaceAll(' ', ',')}]`)
     settings.svgDims.xMin = viewBoxArray[0]
     settings.svgDims.yMin = viewBoxArray[1]
     settings.svgDims.width = viewBoxArray[2]
     settings.svgDims.height = viewBoxArray[3]
-
 }; // end getSVGDims()
+
+
 
 // IV. Setup node and link visual components (from SVG input imported into index.html)
 async function setupNodeLinkComponents(nodeData, linkData){
     console.log('Setting up node and link interactivity')
+
     // 1. Nodes: setup node groups. boxes and labels 
     for (const node of nodeData){
-        const nodeGroup = d3.select(`#node-group_${node.nodeID}`),
-            nodeBox = d3.select(`#node-box_${node.nodeID}`), 
+        // a. Add node group and box classes
+        const nodeGroup = d3.select(`#node-group_${node.nodeID}`)
+                .attr('class', `node ${node.systemClass} ${node.spatialClass}`)
+                .data([node]),
+            nodeBox = d3.select(`#node-box_${node.nodeID}`)
+                .classed('node-box', true), 
             nodeBBox = document.getElementById(`node-box_${node.nodeID}`).getBBox()
 
-        // a. Add node group and box classes
-        nodeGroup.attr('class', `node ${node.classList}`)
-        nodeBox.classed('node-box', true)
+        node.groupID  = node.nodeID.indexOf('_') < 0 ? node.nodeID : node.nodeID.slice(0, node.nodeID.indexOf('_') )
 
         // b. Re-style node box and label (by removing existing SVG label and re-attaching) with CSS classes
         if(settings.layout.applyCSS){   
@@ -119,42 +130,58 @@ async function setupNodeLinkComponents(nodeData, linkData){
                 .text(node.label)
                 .call(helpers.wrap, nodeBBox.width * 0.85, 1.1, true)
         }
+
+        // c. Find links in and out of the node
+        node.input = {
+            links: [],
+            nodes: []
+        },
+        node.output = {
+            links: [],
+            nodes: []
+        }
+        
+        for (const link of linkData){
+            if(link['nodeID-from'] === node.nodeID){
+                node.output.links.push(link.linkID)
+                node.output.nodes.push(link['nodeID-to'])
+            }
+             if(link['nodeID-to'] === node.nodeID){
+                node.input.links.push(link.linkID)
+                node.input.nodes.push(link['nodeID-from'])
+            }
+        }
     }
 
     // 2. Links: setup link groups and lines/arrowheads/shapes  
     for (const link of linkData){
         // a. Find and add link group name to link data object
-        const groupID = link.linkID.indexOf('_') < 0 ? link.linkID : link.linkID.slice(0, link.linkID.indexOf('_') )
-        link.group = `link-group_${groupID}`
-
+        link.groupID  = link.linkID.indexOf('_') < 0 ? link.linkID : link.linkID.slice(0, link.linkID.indexOf('_') )
+ 
         // b. Bind data: manually attach data to the link/flow group (for accessing on link or label hover)
-        d3.select(`#flow-group_${groupID}`)
-            .classed('label-group', true)
+        d3.select(`#flow-group_${link.groupID}`)
+            .classed('link-group', true)
             .data([link])
 
         // c. Link label (group) => remove inline styling (on text elements) and add classes to control styling via CSS 
-        d3.selectAll(`#flow-label_${groupID}, #flow-label_${groupID} text`)
-            .classed('link-label', true)
+        d3.selectAll(`#flow-label_${link.groupID}, #flow-label_${link.groupID} text`)
+            .classed(`link-label  ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`, true)
             .attr('font-family', null)
             .attr('font-size', null)
             .attr('font-weight', null)
 
         // d. Link shapes: and lines/arrows => remove inline styling and add classes to control styling via CSS 
-        switch(link.linkTypeClass){
+        switch( link.linkTypeClass){
             case 'flow-shape':
                 d3.select(`#flow-shape_${link.linkID}`)
-                    .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass} ${link.systemClass}`)
+                    .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
                     .attr('fill', null)
-                d3.select(`#flow-group_${groupID}`)
-                    .attr('class', `link-group ${link.linkTypeClass}`)                    
+                  
                 break
 
             case 'line':
-                d3.select(`#flow-group_${groupID} `)
-                    .attr('class', `link-group ${link.linkTypeClass} ${link.linkShapeClass}  ${link.systemClass}`)
-
                 d3.select(`#line_${link.linkID}`)
-                    .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass}  ${link.systemClass}`)
+                    .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
                     .attr('fill', null)
                     .attr('stroke', null)
                     .attr('stroke-dasharray', null)
@@ -162,7 +189,7 @@ async function setupNodeLinkComponents(nodeData, linkData){
                     .attr('stroke-miterlimit', null)
 
                 d3.select(`#arrowhead_${link.linkID}`)
-                    .attr('class', `arrowhead ${link.linkTypeClass} ${link.linkShapeClass}  ${link.systemClass}`)
+                    .attr('class', `link arrowhead ${link.linkShapeClass}  ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
                     .attr('fill', null)
 
                 break
@@ -177,7 +204,7 @@ async function setupNodeLinkComponents(nodeData, linkData){
         // a. Link groups
         d3.selectAll('.link-group')
             .on('mouseover', function(){
-                // Highlight selection
+                // i. Fade all elements (apart from selected link) 
                 if( this.classList.contains('line')){
                     d3.selectAll(`.link-group.line:not(#${this.id}), .link-group.flow-shape, .node`)
                         .style('opacity', settings.animation.fadeOpacity)
@@ -185,24 +212,63 @@ async function setupNodeLinkComponents(nodeData, linkData){
                     d3.selectAll(`.link-group:not(#${this.id}), .link-group.line, .node`)
                         .style('opacity', settings.animation.fadeOpacity)
                 }
-                // ???
+                // ii. Highlight nodes in and out
+  
             })
 
         // b. Node interactivity
         d3.selectAll('.node')
             .on('mouseover', function(){
-                // Highlight node
-                d3.selectAll(`.node:not(#${this.id}), .flow-shape, .link-group.line`)
+                const nodeData = this.__data__
+                // i. Fade all links and nodes (apart from  selected node)
+                d3.select(`#${this.id}`).classed('selected', true)
+                d3.selectAll(`.node:not(.selected), .flow-shape:not(.link-label), .link-group path, text.link-label`)
                     .style('opacity', settings.animation.fadeOpacity)
 
-                // ???
+                // ii. Highlight links in and out
+                if(nodeData.input.links.length > 0){
+                    const nodeGroupArray = nodeData.input.links.map(d => d.slice(0, d.indexOf('_')) )
+                    const linksInSelection= nodeData.input.links.map(d => `#flow-group_${d}`)
+                        .concat(nodeData.input.links.map(d => `#flow-shape_${d}`))
+                        .concat(nodeData.input.links.map(d => `#flow-group_${d} path`))
+                        .concat(nodeData.input.links.map(d => `#flow-label_${d}`))
+                        .concat(nodeData.input.links.map(d => `#flow-label_${d} text`))
+                        .concat(nodeData.input.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
+                        .concat(nodeData.input.nodes.map(d => `#node-group_${d}`))
+                        .toString()
+
+
+                    d3.selectAll(linksInSelection)
+                        .style('opacity', null)
+                }
+
+                if(nodeData.output.links.length > 0){
+                    const nodeGroupArray = nodeData.output.links.map(d => d.slice(0, d.indexOf('_')) )
+                    const linksOutSelector = nodeData.output.links.map(d => `#flow-group_${d}`)
+                        .concat(nodeData.output.links.map(d => `#flow-shape_${d}`))
+                        .concat(nodeData.output.links.map(d => `#flow-group_${d} path`))
+                        .concat(nodeData.output.links.map(d => `#flow-label_${d}`))
+                        .concat(nodeData.output.links.map(d => `#flow-label_${d} text`))
+                        .concat(nodeData.output.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
+                        .concat(nodeData.output.links.map((d, i) => `#node-group_${nodeGroupArray[i]}`))
+                        .concat(nodeData.output.nodes.map(d => `#node-group_${d}`))
+                        .toString()
+                    d3.selectAll(linksOutSelector)
+                        .style('opacity', null)
+                }
+                // iii. Highlight the in and out nodes
+
+                
+
+                console.log(nodeData)
             })
 
         // c. Node + link (shared) interactivity
         d3.selectAll('.node, .link-group')
             .on('mouseout', () => {
                 // Reset visibility
-                d3.selectAll(`.flow-shape, .link-group.line, .node`)
+                d3.selectAll(`.flow-shape, .link-group path, .node, text.link-label`)
+                    .classed('selected', false)
                     .style('opacity', null)
             })
 }; // end setupNodeLinkComponents()
@@ -210,8 +276,6 @@ async function setupNodeLinkComponents(nodeData, linkData){
 
 // V. Add and setup narrative scenes
 async function setupScenes(sceneData){
-   
-    console.log('Setting up scenes...')
 
     // 1. Extract scene data
     settings.lists.sceneIDs = sceneData.map(d => d['scene-id'])
@@ -233,21 +297,18 @@ async function setupScenes(sceneData){
         .on('click', function(){
             d3.selectAll('.nav-item').classed('selected', false)
             d3.select(this).classed('selected', true)
-            const sceneDatum = this.__data__
-            // Update title and narrative
-            updateNarrative(sceneDatum)
-
-            // Update visible components
-
-            // Update zoom and pan
+            const sceneDatum = this.__data__,
+                panX = sceneDatum.panX * settings.svgDims.width,
+                panY = sceneDatum.panY * settings.svgDims.height            
+            updateNarrative(sceneDatum)         // Update title and narrative
+            updateVisibility(sceneDatum)        // Update visible components
+            scene.methods.setZoom(panX, panY, sceneDatum.zoomScale)         // Update the zoom framing
             console.log(sceneDatum)
-            const panX = sceneDatum.panX * settings.svgDims.width,
-                panY = sceneDatum.panY * settings.svgDims.height
-            scene.methods.setZoom(panX, panY, sceneDatum.zoomScale)
         })
 
 
-        // X. Helper functions  
+        // X. Helper functions for scene
+
         function updateNarrative(sceneDatum, duration = 1000){
             d3.selectAll('#narrative-title, #narrative-container')
                 .transition().duration(duration * 0.25)
@@ -259,10 +320,26 @@ async function setupScenes(sceneData){
                     .transition().duration(duration * 0.75)
                         .style('opacity', null)
             }, duration * 0.25);
-        }; // updateNarrative
+        }; // end updateNarrative()
+
+        function updateVisibility(sceneDatum, duration = 1000){
+            if(sceneDatum['visible-selection'] !== ''){
+                d3.selectAll('.node, .link, .link-label')
+                    .style('pointer-events', 'none')
+                    .transition().duration(duration)
+                    .style('opacity', sceneDatum['fade-opacity'])
+                d3.selectAll(sceneDatum['visible-selection'])
+                    // .style('pointer-events', null)
+                    .transition().duration(duration)
+                    .style('opacity', null)
+            }
+        }; // end updateVisibility()
+
 
     // 4. Set initial scene
-    updateNarrative(document.getElementById(`nav-item-${state.scene}`).__data__)
+    const initSceneDatum = document.getElementById(`nav-item-${state.scene}`).__data__
+    updateNarrative(initSceneDatum)
+    updateVisibility(initSceneDatum)  
     d3.select(`#nav-item-${state.scene}`).classed('selected', true)
 
 
@@ -276,8 +353,7 @@ async function setupScenes(sceneData){
             }, // end handleZoom
 
             resetZoom(){
-                const svg = d3.select(`#${settings.svgID}`)
-                svg
+                scene.els.svg
                     .transition().duration(settings.animation.sceneDuration)
                     .call(
                         scene.methods.zoom.transform, 
@@ -287,8 +363,7 @@ async function setupScenes(sceneData){
             },
 
             setZoom(x, y, scale){
-                console.log('Zoom to:', x, y, scale)
-                d3.select(`#${settings.svgID}`)
+                scene.els.svg
                     .transition().duration(settings.animation.sceneDuration)
                     .call(
                         scene.methods.zoom.transform,
@@ -300,14 +375,14 @@ async function setupScenes(sceneData){
         }
         // b. Add zoom and pan handlers to SVG
         scene.methods.zoom = d3.zoom()
-            .scaleExtent([1, 3])
+            .scaleExtent([1, 4])
             .translateExtent([
                 [-settings.svgDims.width * 0.0, -settings.svgDims.height * 0.0], 
                 [settings.svgDims.width * 1.0, settings.svgDims.height * 1.0]
             ])
             .on('zoom', scene.methods.handleZoom);
 
-        d3.select(`#${settings.svgID}`)
+        scene.els.svg
             .call(scene.methods.zoom) 
 
 
@@ -319,9 +394,14 @@ async function setupScenes(sceneData){
 // V. Start vis
 async function revealVis(){
     // on load reveal
-    d3.select(`.vis-pane`)
+    d3.select(`.main-container`)
         .transition().duration(settings.animation.sceneDuration)
         .style('opacity', null)
+
+
+    // Hide the svg-legend (temp)
+    scene.els.svgLegend.style('opacity', 0)
+
 }; // end renderVis()
 
 

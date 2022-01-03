@@ -4,8 +4,9 @@
 /***   -----------------------------------------   ***/
 /*****************************************************/
 
-
-/*** Core styling ***/
+/*********************/
+/*** CORE STYLING   ***/
+/*********************/
 body, 
 svg text{
     font-family: 'DIN Next LT Pro';
@@ -19,16 +20,20 @@ h1{
 }
 h2.sub-title{
     font-size: 2vw;
-    font-weight: 300;
 }
 h3.narrative-title,
 h3.navigation-title{
     font-size: 1.5vw;
     animation-duration: 250ms;
+    font-weight: 400;
 }
 h1, h2, h3{ 
     margin-block-end: 0;
 }
+h1, h2{
+    font-weight: 300;
+}
+
 .zero-opacity{
     opacity: 0;
 }
@@ -42,45 +47,242 @@ h1, h2, h3{
 .nav-item.selected{
     font-weight: 500;
 }
+
+.icon-menu,
 .nav-item,
 .link-group{
     cursor: pointer;
 }
-/*** HTML page layout: default landscape ***/
-.main-container{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: auto 1fr;
-    grid-column-gap: 0vw;
-    max-height: 100vh;
-    overflow: hidden;
+
+/* Logos and icon styling */
+.logo-icon{
+    fill: #9aca3c;
 }
-.title-pane, .narrative-pane{
-    padding: 1vw;
-    padding-left: 3vw;
-    background: rgba(255, 255, 255, 0.85);
-}
-.title-pane{
-    grid-area: 1 / 1 / 2 / 2; 
-    z-index: 3;
-}
-.narrative-pane{
-    grid-area: 2 / 1 / 3 / 2; 
-    z-index: 2;
-}
-.vis-pane{
-    grid-area: 1 / 2 / 3 / 3;
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    z-index: 1;
-}
-.system-vis{
-    max-height: 100vh;
-    max-width: 75vw;
-    overflow: overlay;
+.logo-text,
+.icon-menu{
+    fill: #fff;
+    stroke: none;
 }
 
+/*******************************************/
+/*** HTML page layout: default landscape ***/
+/*******************************************/
+
+.page-container{
+    display: grid;
+    grid-template-areas: 
+        "header-area" 
+        "vis-area";
+    grid-column-gap: 0vw;
+    height: 100vh;
+    overflow: hidden;
+}
+    /* No header layout */
+    .page-container.hideHeader{
+        /* height: 100vh; */
+    }
+    .hideHeader .header-section{
+        display: none;
+        height: 0vh;
+    }
+
+
+    /* Header section layout*/
+    .header-section{
+        grid-area: header-area; 
+        display: grid;
+        width: 100vw;
+        grid-template-columns: 1fr 3fr;
+        background: var(--xCharcoal);
+        background: #000;
+        align-items: center;
+    }
+        .logo-container,
+        .menu-icon-container{
+            height: 5vh
+        }
+        .logo-container{
+            display: grid;
+            align-items: center;   
+            margin: 1vh;
+            padding-left: 2vw;
+        }   
+        .menu-icon-container{
+            display: grid;
+            align-items: center;
+            justify-items: end;
+            padding-right: 2vw;
+        }
+            .icon-menu{
+                height: 70%;
+            }
+            .logo-header{
+                height: 90%;
+            }
+
+    /* Main (vis) section layout*/
+    .vis-section{
+        display: grid;
+        grid-area: vis-area;
+        grid-template-areas: 
+            "title vis vis vis" 
+            "narrative vis vis vis"
+            "stepper stepper stepper stepper";
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: auto 1fr auto;
+        grid-column-gap: 0vw;
+        max-height: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+        .title-pane, 
+        .narrative-pane, 
+        .stepper-pane{
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .title-pane, 
+        .narrative-pane, 
+        .stepper-instruction{
+            padding: 1vw;
+            padding-left: 3vw;
+        }
+        .stepper-pane{
+            grid-area: stepper; 
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            z-index: 3;
+        }
+        .title-pane{
+            display: grid;
+            grid-area: title; 
+            z-index: 3;
+            height: fit-content;
+        }
+        .narrative-pane{
+            grid-area: narrative; 
+            z-index: 2;
+        }
+        .vis-pane{
+            grid-area: vis;
+            display: flex;
+            justify-content: center;
+            height: 87vh;
+            z-index: 1;
+        }
+        .system-vis{
+            max-height: 90vh;
+            max-width: 75vw;
+            overflow: overlay;
+        }
+
+    /* Nav Stepper styling */
+    .stepper-pane{
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto 0.5rem auto;
+        width: 100%;
+        border-top: solid var(--secondaryGrey) 0.5px;
+    }
+    .stepper-instruction{
+        display: grid;
+        align-items: center;
+        font-size: 0.8vw;
+    }
+    .stepper-container {
+        font-size: 0.8vw;
+        font-weight: 100;
+    }
+    .stepper-container nav {
+        text-align: center;
+        background: #fff;
+    }
+    .stepper-container nav ul {
+        position: relative;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: flex;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        -ms-box-orient: horizontal;
+        -ms-box-pack: center;
+        -webkit-flex-flow: row wrap;
+        -moz-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .stepper-container nav ul li {
+        position: relative;
+        z-index: 1;
+        display: block;
+        margin: 0;
+        text-align: center;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        cursor: pointer;
+    }
+    .stepper-container nav a {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 2.5;
+    }
+    .stepper-container nav a span {
+        vertical-align: middle;
+    }
+    .stepper-container nav a:focus {
+        outline: none;
+    }
+    .stepper-container nav li:last-child::before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--tertiaryPurple);
+        content: '';
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+    }
+    /* Stepper underline */
+    /* Note:  step item styling inserted with JavaScript to accomodate various list/scene lengths */
+    .stepper-container nav a {
+        padding: 0.5rem 0.2rem 0.125rem 0.2rem;
+        line-height: 1;
+        -webkit-transition: color 0.3s, -webkit-transform 0.3s; 
+        transition: color 0.3s, transform 0.3s;
+        font-weight: 300;
+        color: var(--secondaryGrey);
+    }
+    .stepper-container nav li.step-current a {
+        -webkit-transform: translate3d(0,-2px,0);
+        transform: translate3d(0,-2px,0);
+        color: var(--tertiaryPurple);
+        font-weight: 500;
+    }
+    @media screen and (max-width: 58em) {
+        .stepper-container nav a:before {
+            margin-right: 0;
+        }
+    }
+
+
+
+
+/**********************************/
+/*** SVG VISUALISATION STYLING  ***/
+/**********************************/
 
 /* Node styling */
 .node-box{
@@ -124,7 +326,7 @@ h1, h2, h3{
 }
 .node-box,
 .link.line{
-    stroke:             var(--xCharcoal);
+    stroke:            var(--xCharcoal);
 }
 
 /* Tyre material class colours */

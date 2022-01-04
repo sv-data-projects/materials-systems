@@ -378,10 +378,8 @@ function buildFromGSheetData(settings) {
                 scene.methods.closeOverlay()
             };
 
-
             // b. Call method to setup node and link interactivity
             scene.methods.setNodeLinkInteractions()
-
 
         // 4. Setup overlay methods and button close behaviour (incl. setting node/link interaction)
             scene.methods.renderOverlay = (header, htmlContent) => {
@@ -403,8 +401,6 @@ function buildFromGSheetData(settings) {
             scene.methods.openOverlay = () => {
                 d3.select('.overlay-pane').classed('open', true)
             };  // end openOverlay()
-
-
 
             d3.select('.overlay-close-button')
                 .on('click', scene.methods.closeOverlay )

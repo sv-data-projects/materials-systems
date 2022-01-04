@@ -1,0 +1,399 @@
+/*****************************************************/
+/***   MATERIALS SYSTEM VISUALISATION STYLESHEET   ***/
+/***   -----------------------------------------   ***/
+/***    Contains core styling for all shared       ***/
+/***    components of systems visualisations for   ***/
+/***    different materials                        ***/ 
+/*****************************************************/
+
+/*********************/
+/*** CORE STYLING  ***/
+/*********************/
+body, 
+svg text, 
+a:link {
+    font-family: 'DIN Next LT Pro';
+    color: var(--xCharcoal);
+    margin: 0;
+}
+.zero-opacity{
+    opacity: 0;
+}
+
+/* Typography */
+a:link {
+    text-decoration-style: dotted;
+}
+a:visited {
+  color: var(--tertiaryPurple);
+}
+a:hover {
+    font-weight: 500;
+    color: var(--secondaryBottleGreenLight);
+}
+h1{ 
+    font-size: 5vw;
+    margin-block-start: 0.25rem;
+    margin-block-end: 0rem;
+}
+h2.sub-title{
+    font-size: 1.5vw;
+}
+h2.material-title{
+    margin-block-start: 0rem;
+    margin-block-end: 1rem;
+    font-size: 1.5vw;
+    border-bottom: var(--xCharcoal) 0.25px solid;
+}
+h2.overlay-header{
+    font-size: 2.5vw;
+}
+h3.narrative-title,
+h3.navigation-title{
+    font-size: 1.5vw;
+    animation-duration: 250ms;
+    font-weight: 400;
+}
+h1, h2, h3{ 
+    margin-block-end: 0;
+}
+h1, h2{
+    font-weight: 300;
+}
+.material-title, 
+.overlay-header{
+    text-transform: uppercase;
+    letter-spacing: 0.25vw;
+}
+.narrative,
+.stepper-instruction, 
+.overlay-content{
+    font-size: 1vw;
+}
+.narrative,
+.overlay-content{
+    font-weight: 300;
+    line-height: 1.35;
+    animation-duration: 500ms;
+}
+.stepper-instruction,
+.stepper-container {
+    font-weight: 400;
+}
+.stepper-container{
+    font-size: 0.8vw;
+}
+/* Pointer behaviour */
+.icon-menu,
+.nav-item,
+.link-group, 
+.overlay-close-button{
+    cursor: pointer;
+}
+
+/* Logos and icon styling */
+.logo-icon{
+    fill: #9aca3c;
+}
+.logo-text,
+.icon-menu{
+    fill: #fff;
+    stroke: none;
+}
+
+/*******************************************/
+/*** HTML PAGE LAYOUT: default landscape ***/
+/*******************************************/
+
+.page-container{
+    display: grid;
+    grid-template-areas: 
+        "header-area" 
+        "vis-area";
+    grid-column-gap: 0vw;
+    height: 100vh;
+    overflow: scroll;
+}
+    /* No header layout */
+    .hideHeader .header-section{
+        display: none;
+        height: 0vh;
+    }
+
+    /* A. Header section layout*/
+    .header-section{
+        grid-area: header-area; 
+        display: grid;
+        width: 100vw;
+        grid-template-columns: 1fr 3fr;
+        background: var(--xCharcoal);
+        background: #000;
+        align-items: center;
+        z-index: 10;
+    }
+        .logo-container,
+        .menu-icon-container{
+            height: 5vh;
+        }
+        .logo-container{
+            display: grid;
+            align-items: center;   
+            margin: 1vh;
+            padding-left: 2vw;
+        }   
+        .menu-icon-container{
+            display: grid;
+            align-items: center;
+            justify-items: end;
+            padding-right: 2vw;
+        }
+            .icon-menu{
+                height: 70%;
+            }
+            .logo-header{
+                height: 90%;
+            }
+
+    /* B. Main (vis) section layout*/
+    .vis-section{
+        display: grid;
+        grid-area: vis-area;
+        grid-template-areas: 
+            "title vis vis vis" 
+            "narrative vis vis vis"
+            "stepper stepper stepper stepper";
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: auto 1fr auto;
+        grid-column-gap: 0vw;
+        max-height: 100%;
+        height: 100%;
+        /* overflow: hidden; */
+    }
+
+        .title-pane, 
+        .narrative-pane, 
+        .stepper-pane{
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .title-pane, 
+        .narrative-pane, 
+        .stepper-instruction{
+            padding: 1vw 0vw 1vw 3vw;
+            /* margin-left: 3vw; */
+        }
+        .stepper-pane{
+            grid-area: stepper; 
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            z-index: 3;
+        }
+        .title-pane{
+            display: grid;
+            grid-area: title; 
+            z-index: 3;
+            height: fit-content;
+        }
+        .narrative-pane{
+            grid-area: narrative; 
+            z-index: 2;
+        }
+        .vis-pane{
+            grid-area: vis;
+            display: flex;
+            justify-content: center;
+            height: 87vh;
+            z-index: 1;
+        }
+        .system-vis{
+            max-height: 90vh;
+            max-width: 75vw;
+            overflow: overlay;
+        }
+
+    /* Nav Stepper styling */
+    .stepper-pane{
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 5vh;
+        border-top: solid var(--secondaryGrey) 0.5px;
+    }
+    .stepper-instruction{
+        display: grid;
+        align-items: center;
+        padding: 0 0 0 3vw;
+    }
+
+    .stepper-container nav {
+        text-align: center;
+    }
+    .stepper-container nav ul {
+        position: relative;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: flex;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        -ms-box-orient: horizontal;
+        -ms-box-pack: center;
+        -webkit-flex-flow: row wrap;
+        -moz-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .stepper-container nav ul li {
+        position: relative;
+        z-index: 1;
+        display: block;
+        margin: 0;
+        text-align: center;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        cursor: pointer;
+    }
+    .stepper-container nav a {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 2.5;
+    }
+    .stepper-container nav a span {
+        vertical-align: middle;
+    }
+    .stepper-container nav a:focus {
+        outline: none;
+    }
+    .stepper-container nav li:last-child::before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--tertiaryPurple);
+        content: '';
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+    }
+    /* Stepper underline */
+    /* Note:  step item styling inserted with JavaScript to accomodate various list/scene lengths */
+    .stepper-container nav a {
+        padding: 0.5rem 0.2rem 0.125rem 0.2rem;
+        line-height: 1;
+        -webkit-transition: color 0.3s, -webkit-transform 0.3s; 
+        transition: color 0.3s, transform 0.3s;
+        font-weight: 300;
+        color: var(--secondaryGrey);
+    }
+    .stepper-container nav li.step-current a {
+        -webkit-transform: translate3d(0,-2px,0);
+        transform: translate3d(0,-2px,0);
+        color: var(--tertiaryPurple);
+        font-weight: 500;
+    }
+    @media screen and (max-width: 58em) {
+        .stepper-container nav a:before {
+            margin-right: 0;
+        }
+    }
+
+
+    /************************************************************/
+    /*** OVERLAY LAYOUT: appears above the title an narrative ***/
+    /************************************************************/
+
+    .overlay-pane{
+        grid-area: 1 / 1 / 3 / 2;
+        padding: 1vw;
+        background: #36454FF0;
+        color: #fff;
+        z-index: 100;
+        transition-duration: 500ms;
+        transform: translateX(-27.5vw)
+    }
+    .overlay-pane.open{
+        transform: translateX(0)
+    }
+    .overlay-close-container{
+        text-align: right;
+        z-index: 10;
+        height: 3vw;
+    }
+    .overlay-close-button{
+        display: inline-block;
+        margin-top: 0.75vw;
+        height: 100%
+    }
+        .overlay-close-button path{
+            fill: #fff
+        }
+    .overlay-content-container{
+        position: relative;
+        top: 0;
+        z-index: -1;
+    }
+    .overlay-header{
+        padding-right: 3vw;
+        margin-top: -2.5vw;
+    }
+
+
+
+/**********************************/
+/*** SVG VISUALISATION STYLING  ***/
+/**********************************/
+
+/* Node styling */
+.node-box{
+    cursor:         pointer;
+    pointer-events: bounding-box;
+    fill:           transparent;
+    stroke-width:   2px;
+}
+.node-label{
+    text-anchor:    middle;
+    font-size:      20px;
+    pointer-events: none;
+}
+
+.selected .node-box{
+    stroke:       #fff;
+}
+.selected .node-label{
+    fill:       #fff;
+    font-weight:    bold;
+}
+
+/* Link styling */
+.link-label{
+    font-size:      14px;
+    font-weight:    300;
+}
+
+.link.line{
+    fill:               none;
+    stroke-dasharray:   6px 6px;
+    stroke-width:       2px;
+    stroke-linecap:     round;
+}
+/* Node link colours */
+.node-label,
+.link-label,
+.arrowhead,
+.selected .node-box{
+    fill:             var(--xCharcoal);
+}
+.node-box,
+.link.line{
+    stroke:            var(--xCharcoal);
+}

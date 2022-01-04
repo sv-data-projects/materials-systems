@@ -1,3 +1,11 @@
+/*************************************************************************/
+/** 			  STYLESHEET FOR MATERIALS VIS MENU  		  			**/
+/** ------------------------------------------------------------------- **/
+/** Taken (and vry slightly adapted) from Codrops and used under its  	**/
+/** accompanying MIT license. All credits to and (c) with Codrops, see: **/   										**/	
+/** https://tympanus.net/codrops/2020/03/31/css-only-marquee-effect/ 	**/
+/** 																	**/
+/*************************************************************************/
 
 *,
 *::after,
@@ -11,9 +19,9 @@
 
 body {
 	margin: 0;
-	--color-text: #111;
-	--color-bg: #f8ecde;
-	--color-link: #b19e7f;
+	--color-text: #370c31;
+	--color-bg: #d6e6e8;
+	--color-link: #297d7e;
 	--color-link-hover: #000;
 	color: var(--color-text);
 	background-color: var(--color-bg);
@@ -68,7 +76,6 @@ a:focus {
 	z-index: 1000;
 	line-height: 1;
 }
-
 .frame__title {
 	margin: 0 0 1rem;
 	font-weight: 700;
@@ -80,12 +87,10 @@ a:focus {
 	display: inline;
 	font-size: 1vw;
 }
-
 .frame__links a:not(:last-child),
 .frame__demos a:not(:last-child) {
 	margin-right: 1rem;
 }
-
 .frame__demos {
 	margin: 1rem 0;
 }
@@ -153,6 +158,7 @@ a:focus {
 	left: 100%;
 	top: 50%;
 	transform: translate3d(calc(-100% - 6vw),-30%,0) translate3d(0,20px,0);
+	filter: sepia(0.15);
 }
 
 .menu__item-link:hover + .menu__item-img {

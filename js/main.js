@@ -1,9 +1,25 @@
 //////////////////////////////////////////////
-///// MATERIALS SYSTEMS VISUALISTAION   //////
+///// MATERIALS SYSTEMS VISUALISATION   //////
+///// -------------------------------   //////
+///// Shared functions and api (link)   //////
+///// references across all material    //////
+///// system visuals.                   //////
 //////////////////////////////////////////////
 
+// 0. INITIALISE DATA AND SETTINGS OBJECTS
 
-// 0. INITIALISE SETTINGS AND DATA OBJECTS
+const api = {           // References for data table links for each table used (tsv published output from each separate sheet/table)
+    gsTableLinks: {
+        'Tyres' : {
+            nodes:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=0&single=true&output=tsv',
+            links:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=1426394391&single=true&output=tsv',
+            scenes:         'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=720144192&single=true&output=tsv'
+        }
+    }
+}
+
+const data = {}         // Object to store loaded/parsed data
+
 const settings = {           // Visualisation settings
     material:           'Tyres',
     svgID:              'tyres-system',
@@ -22,34 +38,26 @@ const settings = {           // Visualisation settings
     }
 }
 
-const data = {}         // Object to store loaded/parsed data
 const scene = {         // Object to store scene element references and data methods
     els: {},
     methods: {} 
-}        
+}   
+
 const state = {         // Object to store application state
     scene:      ''      // SceneID set on load
 }
 
 // 1.  VISUALISATION BUILD FUNCTION  
-buildFromGSheetData(settings)       // Build function called on load
+
 
 function buildFromGSheetData(settings) {
-    // 1. Specify data table links for each table used (tsv published output from each separate sheet/table)
-    const gsTableLinks = {
-        'Tyres' : {
-            nodes:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=0&single=true&output=tsv',
-            links:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=1426394391&single=true&output=tsv',
-            scenes:         'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=720144192&single=true&output=tsv'
-        }
-    }
-    // 2. Asynchronous data load (with Promise.all) and D3 (Fetch API) 
+    // 2. Asynchronous data load (with Promise.all) and D3 (Fetch API): references the shared "api" object for links to specific data tables
     Promise.all(
-        Object.values(gsTableLinks[settings.material]).map(link => d3.tsv(link))       // Pass in array of d3.tsv loaders with each link
+        Object.values(api.gsTableLinks[settings.material]).map(link => d3.tsv(link))       // Pass in array of d3.tsv loaders with each link
     ).then( rawData => {
         // a. Parse each loaded data table and store in data.[materialName] object, using the parseTable helper 
         data[settings.material] = {} 
-        rawData.forEach((tableData, i) => {  parseTable(Object.keys(gsTableLinks[settings.material])[i], tableData) })
+        rawData.forEach((tableData, i) => {  parseTable(Object.keys(api.gsTableLinks[settings.material])[i], tableData) })
         return data
 
     }).then( async (data) => {
@@ -552,7 +560,6 @@ function buildFromGSheetData(settings) {
             .transition().duration(settings.animation.sceneDuration)
             .style('opacity', null)
 
-
         // Hide the svg-legend (temp)
         scene.els.svgLegend.style('opacity', 0)
 
@@ -560,8 +567,10 @@ function buildFromGSheetData(settings) {
 
 
 
-//////////////////////////////////////////////
+
+
 //  HELPER METHODS
+
 const helpers= {
     slugify: function (str) {
         str = str.replace(/^\s+|\s+$/g, '').toLowerCase(); // trim           

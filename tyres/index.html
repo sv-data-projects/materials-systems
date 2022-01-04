@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/style.css">
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.js" integrity="sha512-cJ7aOLpXbec1Km9craM6xL6UOdlWf9etIz7f+cwQv2tuarLm3PLb3dv3ZqIK++SE4ui+EE0nWqKB0dOaAOv9gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+        <script src="js/main.js" async defer></script>
     </head>
     <body>
         <main class = "page-container" style="opacity: 0">
@@ -22,7 +23,7 @@
                     </svg>
                 </div>
                 <nav class = "menu-icon-container">
-                    <svg class = "icon-menu" viewBox="0 0 100 80">
+                    <svg class = "icon-menu" viewBox="0 0 100 80" role="button" aria-label="Menu">
                         <rect y="0"  width="100" height="16" rx="8"></rect>
                         <rect y="30" width="100" height="16" rx="8"></rect>
                         <rect y="60" width="100" height="16" rx="8"></rect>
@@ -35,7 +36,7 @@
                 <!-- 1. Visualisation stepper container-->
                 <div class = "stepper-pane">
                     <div class = "stepper-instruction">
-                        Explore the system &#x2192;
+                        Navigate through key system components &#x2192;
                     </div>
                     <div class = "stepper-container">
                         <nav class = "stepper-nav"> </nav>
@@ -45,7 +46,8 @@
                 <!-- 2. Title pane-->
                 <div class = "title-pane">
                     <h2 class = "sub-title">material system</h2>
-                    <h1 class = "main-title">Tyres</h1>
+                    <h1 class = "main-title material-title">Tyres</h1>
+                    <h2 class = "sub-title material-title">in australia</h2>
                 </div>
 
                 <!-- 3. Narrative pane-->
@@ -415,11 +417,28 @@
 
 
                 </div>
+
+
+                <!-- 5. OVERLAYS: above the narrative and title -->
+                <div class ="overlay-pane close">
+                    <div class = "overlay-close-container">
+                        <svg class ='overlay-close-button' viewBox = "0 0 50 50" role="button" aria-label="Close">
+                            <path  d="M18.75.75c-9.931 0-18 8.069-18 18s8.069 18 18 18 18-8.069 18-18-8.069-18-18-18Zm0 1.636c9.047 0 16.364 7.317 16.364 16.364S27.797 35.113 18.75 35.113 2.386 27.797 2.386 18.75 9.703 2.386 18.75 2.386zM14.16 13.42a.819.819 0 0 0-.485 1.406l3.924 3.925-3.924 3.912a.819.819 0 1 0 1.15 1.163L18.75 19.9l3.925 3.925a.818.818 0 1 0 1.15-1.163l-3.924-3.912 3.924-3.925a.818.818 0 1 0-1.15-1.163l-3.925 3.924-3.925-3.924a.818.818 0 0 0-.664-.243z"/>    
+                        </svg>
+                    </div>
+                    <div class ="overlay-content-container">
+                        <h2 class = "overlay-header">This is an overlay header</h2>
+                        <div class ="overlay-content">
+                            <p>This is is overlay text for testing how overlays might look </p>
+                        </div>
+                    </div>
+                </div>
+
+
             </section>
         </main>
 
 
 
-        <script src="js/main.js" async defer></script>
     </body>
 </html>

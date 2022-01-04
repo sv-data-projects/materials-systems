@@ -24,7 +24,8 @@ const settings = {           // Visualisation settings
 
 const data = {}         // Object to store loaded/parsed data
 const scene = {         // Object to store scene element references and data methods
-    els: {}
+    els: {},
+    methods: {} 
 }        
 const state = {         // Object to store application state
     scene:      ''      // SceneID set on load
@@ -105,12 +106,11 @@ function buildFromGSheetData(settings) {
     }; // end getSVGDims()
 
 
-
     // III. Setup node and link visual components (from SVG input imported into index.html)
     async function setupNodeLinkComponents(nodeData, linkData){
         console.log('Setting up node and link interactivity')
 
-        // 1. Nodes: setup node groups. boxes and labels 
+        // 1. NODES: setup node groups. boxes and labels 
         for (const node of nodeData){
             // a. Add node group and box classes
             const nodeGroup = d3.select(`#node-group_${node.nodeID}`)
@@ -157,7 +157,7 @@ function buildFromGSheetData(settings) {
             }
         }
 
-        // 2. Links: setup link groups and lines/arrowheads/shapes  
+        // 2. LINKS: setup link groups and lines/arrowheads/shapes  
         for (const link of linkData){
             // a. Find and add link group name to link data object
             link.groupID  = link.linkID.indexOf('_') < 0 ? link.linkID : link.linkID.slice(0, link.linkID.indexOf('_') )
@@ -204,77 +204,212 @@ function buildFromGSheetData(settings) {
             }
         }
 
-        // 3. Interactivity: add Node and link interactivity
-            // a. Link groups
-            d3.selectAll('.link-group')
-                .on('mouseover', function(){
-                    // i. Fade all elements (apart from selected link) 
-                    if( this.classList.contains('line')){
-                        d3.selectAll(`.link-group.line:not(#${this.id}), .link-group.flow-shape, .node`)
-                            .style('opacity', settings.animation.fadeOpacity)
-                    } else {
-                        d3.selectAll(`.link-group:not(#${this.id}), .link-group.line, .node`)
-                            .style('opacity', settings.animation.fadeOpacity)
-                    }
-                    // ii. Highlight nodes in and out
-    
-                })
+        // 3. INTERACTIVITY: add Node and link interactivity
 
-            // b. Node interactivity
-            d3.selectAll('.node')
-                .on('mouseover', function(){
-                    const nodeData = this.__data__
-                    // i. Fade all links and nodes (apart from  selected node)
-                    d3.select(`#${this.id}`).classed('selected', true)
-                    d3.selectAll(`.node:not(.selected), .flow-shape:not(.link-label), .link-group path, text.link-label`)
-                        .style('opacity', settings.animation.fadeOpacity)
+            // a. Setup interactivity methods
+            scene.methods.setNodeLinkInteractions = () => {
+                d3.selectAll('.link-group')
+                    .on('mouseover', scene.methods.linkMouseover)
+                    .on('click', scene.methods.linkClick)
+                d3.selectAll('.node')
+                    .on('mouseover', scene.methods.nodeMouseover)
+                    .on('click', scene.methods.nodeClick )
+                d3.selectAll('.node, .link-group')
+                    .on('mouseout', scene.methods.resetVisibility)
+            }; // end setNodeLinkInteractions()
 
-                    // ii. Highlight links in and out
-                    if(nodeData.input.links.length > 0){
-                        const nodeGroupArray = nodeData.input.links.map(d => d.slice(0, d.indexOf('_')) )
-                        const linksInSelection= nodeData.input.links.map(d => `#flow-group_${d}`)
-                            .concat(nodeData.input.links.map(d => `#flow-shape_${d}`))
-                            .concat(nodeData.input.links.map(d => `#flow-group_${d} path`))
-                            .concat(nodeData.input.links.map(d => `#flow-label_${d}`))
-                            .concat(nodeData.input.links.map(d => `#flow-label_${d} text`))
-                            .concat(nodeData.input.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
-                            .concat(nodeData.input.nodes.map(d => `#node-group_${d}`))
-                            .toString()
+            scene.methods.clearAllNodeLinkInteractions = () => {
+                d3.selectAll('.node, .link-group')
+                    .on('mouseover', null)
+                    .on('mouseout', null)
+                    .on('click', null)
+            }; // end clearAllNodeLinkInteractions()
 
+            scene.methods.clearNodeLinkMouseover = () => {
+                d3.selectAll('.node, .link-group')
+                    .on('mouseover', null)
+                    .on('mouseout', null)
+            }; // clearNodeLinkMouseover()
 
-                        d3.selectAll(linksInSelection)
-                            .style('opacity', null)
-                    }
+            scene.methods.nodeMouseover = function() {
+                const nodeData = this.__data__
+                // i. Fade all links and nodes (apart from  selected node) and  highlight links in and out
+                scene.methods.highlighNodeInOuts(this.id, nodeData.input, nodeData.output)
+            }; // end nodeMouseover()
 
-                    if(nodeData.output.links.length > 0){
-                        const nodeGroupArray = nodeData.output.links.map(d => d.slice(0, d.indexOf('_')) )
-                        const linksOutSelector = nodeData.output.links.map(d => `#flow-group_${d}`)
-                            .concat(nodeData.output.links.map(d => `#flow-shape_${d}`))
-                            .concat(nodeData.output.links.map(d => `#flow-group_${d} path`))
-                            .concat(nodeData.output.links.map(d => `#flow-label_${d}`))
-                            .concat(nodeData.output.links.map(d => `#flow-label_${d} text`))
-                            .concat(nodeData.output.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
-                            .concat(nodeData.output.links.map((d, i) => `#node-group_${nodeGroupArray[i]}`))
-                            .concat(nodeData.output.nodes.map(d => `#node-group_${d}`))
-                            .toString()
-                        d3.selectAll(linksOutSelector)
-                            .style('opacity', null)
-                    }
-                    // iii. Highlight the in and out nodes
+            scene.methods.highlighNodeInOuts = (nodeID, inputData, outputData) => {
+                scene.methods.resetVisibility()
+                d3.selectAll('.node').classed('selected', false)
+                d3.select(`#${nodeID}`).classed('selected', true)
+                d3.selectAll(`.node:not(.selected), .flow-shape:not(.link-label), .link-group path, text.link-label`)
+                    .transition().duration(0)
+                    .style('opacity', settings.animation.fadeOpacity)
 
-                    
+                if(inputData.links.length > 0){
+                    const nodeGroupArray = inputData.links.map(d => d.slice(0, d.indexOf('_')) )
+                    const linksInSelection = inputData.links.map(d => `#flow-group_${d}`)
+                        .concat(inputData.links.map(d => `#flow-shape_${d}`))
+                        .concat(inputData.links.map(d => `#flow-group_${d} path`))
+                        .concat(inputData.links.map(d => `#flow-label_${d}`))
+                        .concat(inputData.links.map(d => `#flow-label_${d} text`))
+                        .concat(inputData.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
+                        .concat(inputData.nodes.map(d => `#node-group_${d}`))
+                        .toString()
 
-                    console.log(nodeData)
-                })
-
-            // c. Node + link (shared) interactivity
-            d3.selectAll('.node, .link-group')
-                .on('mouseout', () => {
-                    // Reset visibility
-                    d3.selectAll(`.flow-shape, .link-group path, .node, text.link-label`)
-                        .classed('selected', false)
+                    d3.selectAll(linksInSelection)
+                        .transition().duration(0)
                         .style('opacity', null)
-                })
+                }
+
+                if(outputData.links.length > 0){
+                    const nodeGroupArray = outputData.links.map(d => d.slice(0, d.indexOf('_')) )
+                    const linksOutSelector = outputData.links.map(d => `#flow-group_${d}`)
+                        .concat(outputData.links.map(d => `#flow-shape_${d}`))
+                        .concat(outputData.links.map(d => `#flow-group_${d} path`))
+                        .concat(outputData.links.map(d => `#flow-label_${d}`))
+                        .concat(outputData.links.map(d => `#flow-label_${d} text`))
+                        .concat(outputData.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
+                        .concat(outputData.links.map((d, i) => `#node-group_${nodeGroupArray[i]}`))
+                        .concat(outputData.nodes.map(d => `#node-group_${d}`))
+                        .toString()
+                    d3.selectAll(linksOutSelector)
+                        .transition().duration(200)
+                        .style('opacity', null)
+                }
+            }; // end highlightNodeInsOuts()
+
+            scene.methods.highlighLinkNodes = (link) => {
+                // i. Fade all elements (apart from selected link) 
+                if( link.classList.contains('line')){
+                    d3.selectAll(`.link-group.line:not(#${link.id}), .link-group.flow-shape, .node`)
+                        .transition().duration(0)
+                        .style('opacity', settings.animation.fadeOpacity)
+                } else {
+                    d3.selectAll(`.link-group:not(#${link.id}), .link-group.line, .node`)
+                        .transition().duration(0)
+                        .style('opacity', settings.animation.fadeOpacity)
+                }
+                // ii. Highlight nodes in and out
+                const linkData = link.__data__
+                d3.selectAll('.node').classed('selected', false)
+                    .transition().duration(0)
+                    .style('opacity', settings.animation.fadeOpacity)
+                    
+                d3.selectAll(`#node-group_${linkData['nodeID-from']} , #node-group_${linkData['nodeID-to']}`)
+                    .transition().duration(0)
+                    .style('opacity', null)
+
+            }; // end highlighLinkNodes
+
+            scene.methods.nodeClick = function() {
+                const nodeData = this.__data__
+
+                // i. Highlight links in and out, set overlay and interactivity
+                scene.methods.highlighNodeInOuts(this.id, nodeData.input, nodeData.output)
+                scene.methods.renderOverlay(nodeData.label, nodeData.description)
+                scene.methods.openOverlay()
+                scene.methods.clearNodeLinkMouseover()
+
+                // ii. Pan and zoom to visible nodes
+                const connectedNodeIDs = [...new Set(nodeData.input.nodes.concat(nodeData.output.nodes) )]
+                    .filter(d => d !== "")
+                    .map( d => `node-group_${d}`)
+                    .concat([this.id]),
+
+                    connectedNodeBBox = connectedNodeIDs.map( d => document.getElementById(d).getBBox()),
+                    topLeft =       [d3.min(connectedNodeBBox.map(d => d.x)), d3.min(connectedNodeBBox.map(d => d.y))] 
+                    bottomRight =   [d3.max(connectedNodeBBox.map(d => d.x + d.width)),  d3.max(connectedNodeBBox.map(d => d.y + d.height))],
+                    height =        bottomRight[1] - topLeft[1],
+                    width =         bottomRight[0] - topLeft[0],
+                    panX = d3.mean([bottomRight[0], topLeft[0]]),
+                    panY = d3.mean([bottomRight[1], topLeft[1]]),
+                    zoom = 0.85 * d3.min([settings.svgDims.height / height , settings.svgDims.width / width])        
+                
+                scene.methods.setZoom(panX, panY, zoom)    
+            }; // end nodeClick()
+
+            scene.methods.linkMouseover = function() {
+                // i Highlight link and to/from nodes
+                scene.methods.highlighLinkNodes(this)
+
+            }; // end linkMouseover()
+
+            scene.methods.linkClick = function() {
+                const linkData = this.__data__
+
+                // i Highlight link and to/from nodes, set overlay and interactivity
+                scene.methods.highlighLinkNodes(this)
+                scene.methods.renderOverlay(linkData.label, linkData.description)
+                scene.methods.openOverlay()
+                scene.methods.clearNodeLinkMouseover()
+
+                // ii. Pan and zoom to visible nodes
+                let connectedNodeLinkIDs = []
+                if(linkData['nodeID-from']) connectedNodeLinkIDs.push(`node-group_${linkData['nodeID-from']}`)
+                if(linkData['nodeID-to']) connectedNodeLinkIDs.push(`node-group_${linkData['nodeID-to']}`)
+
+                connectedNodeLinkIDs = connectedNodeLinkIDs
+                    .filter(d => d !== "")
+                    .concat([this.id])
+
+                const connectedNodeBBox = connectedNodeLinkIDs.map( d => document.getElementById(d).getBBox()),
+                    topLeft =       [d3.min(connectedNodeBBox.map(d => d.x)), d3.min(connectedNodeBBox.map(d => d.y))] 
+                    bottomRight =   [d3.max(connectedNodeBBox.map(d => d.x + d.width)),  d3.max(connectedNodeBBox.map(d => d.y + d.height))],
+                    height =        bottomRight[1] - topLeft[1],
+                    width =         bottomRight[0] - topLeft[0],
+                    panX = d3.mean([bottomRight[0], topLeft[0]]),
+                    panY = d3.mean([bottomRight[1], topLeft[1]]),
+                    zoom = 0.85 * d3.min([settings.svgDims.height / height , settings.svgDims.width / width])        
+                
+                scene.methods.setZoom(panX, panY, zoom)    
+
+            }; // end linkClick()
+
+            scene.methods.resetVisibility = () => {
+                // Reset visibility
+                d3.selectAll(`.flow-shape, .link-group, .link-group path, .node, text.link-label`)
+                    .classed('selected', false)
+                    .style('opacity', null)
+            }; // end resetVisibility()
+
+            scene.methods.resetAll = () => {
+                scene.methods.resetVisibility()
+                scene.methods.resetZoom()
+                scene.methods.closeOverlay()
+            };
+
+
+            // b. Call method to setup node and link interactivity
+            scene.methods.setNodeLinkInteractions()
+
+
+        // 4. Setup overlay methods and button close behaviour (incl. setting node/link interaction)
+            scene.methods.renderOverlay = (header, htmlContent) => {
+                d3.select('.overlay-header').html(header)
+                d3.select('.overlay-content').html(htmlContent)
+                d3.selectAll('.overlay-header, .overlay-content')
+                    .style('opacity', 0)
+                    .transition().duration(250)
+                    .style('opacity', null)
+            }; // end renderOverlay()
+
+            scene.methods.closeOverlay = (resetZoom = true) => {
+                d3.select('.overlay-pane').classed('open', false)
+                scene.methods.setNodeLinkInteractions()
+                scene.methods.resetVisibility()
+                if(resetZoom) scene.methods.resetZoom()
+            }; // end closeOverlay()
+
+            scene.methods.openOverlay = () => {
+                d3.select('.overlay-pane').classed('open', true)
+            };  // end openOverlay()
+
+
+
+            d3.select('.overlay-close-button')
+                .on('click', scene.methods.closeOverlay )
+
+
     }; // end setupNodeLinkComponents()
 
 
@@ -329,7 +464,11 @@ function buildFromGSheetData(settings) {
                     panY = sceneDatum.panY * settings.svgDims.height            
                 updateNarrative(sceneDatum)         // Update title and narrative
                 updateVisibility(sceneDatum)        // Update visible components
+
                 scene.methods.setZoom(panX, panY, sceneDatum.zoomScale)         // Update the zoom framing
+                // Close any overlays (without resetting zoom)
+                scene.methods.closeOverlay(false)
+                scene.methods.clearNodeLinkMouseover()              // Stop mouseover 
             })
 
             // X. Helper functions for scene
@@ -349,16 +488,15 @@ function buildFromGSheetData(settings) {
             function updateVisibility(sceneDatum, duration = 1000){
                 if(sceneDatum['visible-selection'] !== ''){
                     d3.selectAll('.node, .link, .link-label')
-                        .style('pointer-events', 'none')
+                        // .style('pointer-events', 'none')
                         .transition().duration(duration)
                         .style('opacity', sceneDatum['fade-opacity'])
+
                     d3.selectAll(sceneDatum['visible-selection'])
-                        // .style('pointer-events', null)
                         .transition().duration(duration)
                         .style('opacity', null)
                 }
             }; // end updateVisibility()
-
 
 
         // 4. Set initial scene
@@ -368,35 +506,34 @@ function buildFromGSheetData(settings) {
         d3.select(`#nav-item-${state.scene}`).classed('selected', true)
 
 
-        // 4. Setup Zoom and pan behaviour
+        // 5. Setup Zoom and pan behaviour
             // a. Add methods for controlling zoom and pan
-            scene.methods = {
-                handleZoom: (e) => {
-                    d3.select('g.zoom-area')
-                        .attr('transform', e.transform);
-                }, // end handleZoom
+            scene.methods.handleZoom = (e) => {
+                d3.select('g.zoom-area')
+                    .attr('transform', e.transform);
+            } // end handleZoom();
 
-                resetZoom(){
-                    scene.els.svg
-                        .transition().duration(settings.animation.sceneDuration)
-                        .call(
-                            scene.methods.zoom.transform, 
-                            d3.zoomIdentity,
-                            d3.zoomTransform(svg.node()).invert([settings.svgDims.width / 2, settings.svgDims.height / 2])
-                        )           
-                },
+            scene.methods.resetZoom = () =>{
+                scene.els.svg
+                    .transition().duration(settings.animation.sceneDuration)
+                    .call(
+                        scene.methods.zoom.transform, 
+                        d3.zoomIdentity,
+                        d3.zoomTransform(scene.els.svg.node()).invert([settings.svgDims.width / 2, settings.svgDims.height / 2])
+                    )           
+            }; // end resetZoom()'
 
-                setZoom(x, y, scale){
-                    scene.els.svg
-                        .transition().duration(settings.animation.sceneDuration)
-                        .call(
-                            scene.methods.zoom.transform,
-                            d3.zoomIdentity.translate(settings.svgDims.width / 2, settings.svgDims.height / 2)
-                                .scale(scale)
-                                .translate(-x, -y)
-                        )    
-                }
-            }
+             scene.methods.setZoom = (x, y, scale) => {
+                scene.els.svg
+                    .transition().duration(settings.animation.sceneDuration)
+                    .call(
+                        scene.methods.zoom.transform,
+                        d3.zoomIdentity.translate(settings.svgDims.width / 2, settings.svgDims.height / 2)
+                            .scale(scale)
+                            .translate(-x, -y)
+                    )    
+            }; // end setZoom();
+            
             // b. Add zoom and pan handlers to SVG
             scene.methods.zoom = d3.zoom()
                 .scaleExtent([1, 4])
@@ -408,7 +545,6 @@ function buildFromGSheetData(settings) {
 
             scene.els.svg
                 .call(scene.methods.zoom) 
-
 
     }; // end setupScenes()
 
@@ -429,7 +565,6 @@ function buildFromGSheetData(settings) {
 
 
 //////////////////////////////////////////////
-
 //  HELPER METHODS
 const helpers= {
     slugify: function (str) {

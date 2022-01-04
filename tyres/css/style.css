@@ -108,7 +108,7 @@ h1, h2{
         "header-area" 
         "vis-area";
     grid-column-gap: 0vw;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
     /* No header layout */
@@ -317,7 +317,7 @@ h1, h2{
         color: #fff;
         z-index: 100;
         transition-duration: 500ms;
-        transform: translateX(-25.25vw)
+        transform: translateX(-27.5vw)
     }
     .overlay-pane.open{
         transform: translateX(0)

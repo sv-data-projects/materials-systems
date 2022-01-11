@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xml:space="preserve"
+   fill-rule="evenodd"
+   stroke-miterlimit="10"
+   clip-rule="evenodd"
+   viewBox="0 0 2500 2500"
+   version="1.1"
+   id="svg623"
+   sodipodi:docname="Tyres - Circular system diagram (single).svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs627">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+      
+    
+      
+      
+    
+        
+      
+    
+  
+    
+  
+    
+  
+      
+      
+      
+      
+    
+        
+      
+      
+      
+      
+      
+    
+        
+      
+      
+      
+      
+      
+    
+        
+      
+        
+      
+      
+      
+    
+        
+      
+      
+      
+    
+        
+      
+      
+      
+    
+        
+      
+      
+      
+    
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+    
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      </defs><sodipodi:namedview
+     id="namedview625"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.0011337"
+     inkscape:cx="1886.861"
+     inkscape:cy="495.43834"
+     inkscape:window-width="2560"
+     inkscape:window-height="1440"
+     inkscape:window-x="1512"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="flow-group_waste-to-energy" /><g
+     inkscape:groupmode="layer"
+     id="group-flow-paths"
+     inkscape:label="flow-paths"><g
+       id="flow-group_lost-damages-or-unused-stock"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4, 4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         d="M 1599.52,1132.387 H 1817.6"
+         id="line_lost-damages-or-unused-stock" /><path
+         fill-rule="nonzero"
+         d="m 1816.14,1137.377 8.64,-4.99 -8.64,-4.98 z"
+         id="arrowhead_-lost-damages-or-unused-stock" /></g><g
+       id="flow-group_down-cycling"><path
+         fill="#d1d3d4"
+         fill-rule="nonzero"
+         d="m 502.28,683.867 v 368.88 h 19.28 v -368.83 c 0,-99.13 80.36,-179.48 179.48,-179.48 h 180.05 l 13.37,-9.71 -13.37,-9.68 H 701.1 c -109.8,0 -198.82,89.01 -198.82,198.82 z"
+         id="flow-shape_down-cycling_cm" /></g><g
+       id="flow-group_feedstock-logistics-out"><path
+         fill="#d1d3d4"
+         fill-rule="nonzero"
+         d="m 1171.81,504.047 h -72.32 v -19.28 h 72.27 c 99.13,0 179.48,-80.36 179.48,-179.48 v -41.81 l 9.71,-13.37 9.68,13.37 v 41.75 c 0,109.8 -89.01,198.82 -198.82,198.82 z"
+         id="flow-shape_feedstock-logistics_cm" /></g><g
+       id="flow-group_waste-processing"><path
+         fill="#d1d3d4"
+         d="m 487.06,1620.177 h 19.39 v -396.71 l -9.71,-14 -9.68,14 z"
+         id="flow-shape_waste-processing_cm" /></g><g
+       id="flow-group_export"><path
+         fill="#6e5a7a"
+         d="m 514.81,2035.797 h -82.77 v 32.77 c 0,67.89 -55.03,122.92 -122.92,122.92 h -58.45 l -40,66.26 9.96,16.5 h 88.49 c 113.6,0 205.68,-92.09 205.68,-205.68 v -32.77 z"
+         id="flow-shape_export_pt" /><path
+         fill="#e56a6f"
+         fill-rule="nonzero"
+         d="m 564.56,2035.787 h -5.85 v 32.79 c 0,137.84 -111.74,249.58 -249.58,249.58 h -61.99 l 3.53,5.85 h 58.45 c 141.07,0 255.44,-114.36 255.44,-255.44 z"
+         id="flow-shape_export_ot" /><path
+         fill="#b56576"
+         d="m 247.14,2318.157 h 61.99 c 137.84,0 249.59,-111.74 249.59,-249.59 v -32.78 h -43.91 v 32.77 c 0,113.6 -92.09,205.68 -205.68,205.68 h -88.49 z"
+         id="flow-shape_export_tt" /></g><g
+       id="flow-group_littering-and-dumping"><path
+         fill="#b56576"
+         fill-rule="nonzero"
+         d="m 973.76,2320.347 v -227.48 h -3.98 v 224.68 z"
+         id="flow-shape_littering-and-dumping-tt" /><path
+         fill="#e56a6f"
+         fill-rule="nonzero"
+         d="m 997.11,2336.897 -23.35,-16.55 v -227.48 h 51.78 v 223.9 z"
+         id="flow-shape_littering-and-dumping-ot" /><path
+         fill="#6e5a7a"
+         fill-rule="nonzero"
+         d="m 969.78,2317.547 v -224.68 h -1.11 v 223.9 z"
+         id="flow-shape_littering-and-dumping-pt" /></g><g
+       id="flow-group_use"><path
+         fill="#b56576"
+         d="m 1444.74,1774.197 v 52.42 c 0,49.79 -40.36,90.15 -90.15,90.15 h -203.26 l -52,120.47 52,120.47 h 203.26 c 182.86,0 331.1,-148.24 331.1,-331.1 v -52.41 z"
+         id="flow-shape_use_ot" /><path
+         fill="#e56a6f"
+         d="m 1625.45,1774.207 v 52.41 c 0,149.59 -121.27,270.86 -270.86,270.86 h -229.26 l 26,60.24 h 203.26 c 182.86,0 331.1,-148.24 331.1,-331.1 v -52.41 z"
+         id="flow-shape_use_tt" /><path
+         fill="#6e5a7a"
+         d="m 1108.69,2015.797 h 245.66 c 104.48,0 189.18,-84.7 189.18,-189.18 v -52.18 h -98.79 v 52.18 c 0,49.92 -40.47,90.39 -90.39,90.39 h -203.02 z"
+         id="flow-shape_use_pt" /></g><g
+       id="flow-group-degradation"><path
+         fill="#d1d3d4"
+         d="m 1804.78,1672.297 20,21.26 -20,21.26 h -205.26 v -42.52 z"
+         id="flow-shape_degredation_cm" /></g><g
+       fill-rule="nonzero"
+       id="flow-group_overseas-markets-materials"><path
+         fill="#d1d3d4"
+         d="m 2218.29,358.477 v -105.24 h -79.37 v 105.25 c 0,5.52 -4.48,10 -10,10 h -49.37 l -50.15,79.37 h 99.52 c 49.36,0 89.37,-40.01 89.37,-89.38 z"
+         id="flow-shape_synthetic-rubber" /><path
+         fill="#bcbec0"
+         d="m 2254.77,358.477 v -105.24 h -31.18 v 105.24 c 0,49.36 -40.02,89.38 -89.38,89.38 H 2029.4 l -19.69,31.18 h 124.5 c 66.58,0 120.56,-53.98 120.56,-120.56 z"
+         id="flow-shape_natural-rubber" /><path
+         fill="#d1d3d4"
+         d="m 2290.95,358.477 v -105.24 h -31.18 v 105.24 c 0,66.58 -53.98,120.56 -120.56,120.56 h -129.5 l -19.72,31.18 h 149.23 c 83.8,0 151.73,-67.94 151.73,-151.74 z"
+         id="flow-shape_sulhpur-and-other-additives" /><path
+         fill="#bcbec0"
+         d="m 2300.2,358.477 v -105.24 h -4.25 v 105.24 c 0,83.8 -67.93,151.73 -151.73,151.73 h -154.23 l -0.45,0.71 2.24,3.54 h 152.44 c 86.14,0.01 155.98,-69.83 155.98,-155.98 z"
+         id="flow-shape_zinc-oxide" /><path
+         fill="#d1d3d4"
+         d="m 2309.45,358.477 v -105.24 h -4.25 v 105.24 c 0,86.15 -69.84,155.98 -155.98,155.98 h -157.44 l 2.69,4.25 h 154.75 c 88.49,0.01 160.23,-71.73 160.23,-160.23 z"
+         id="flow-shape_polyester" /><path
+         fill="#bcbec0"
+         d="m 2318.71,358.477 v -105.24 h -4.25 v 105.24 c 0,88.5 -71.74,160.24 -160.24,160.24 h -159.75 l 2.69,4.25 h 157.06 c 90.84,0 164.49,-73.64 164.49,-164.49 z"
+         id="flow-shape_nylon" /><path
+         fill="#d1d3d4"
+         d="m 2340.71,358.477 v -105.24 h -17.01 v 105.24 c 0,90.84 -73.64,164.49 -164.49,164.49 h -162.06 l 10.75,17.01 h 151.32 c 100.23,0 181.49,-81.26 181.49,-181.5 z"
+         id="flow-shape_silica" /><path
+         fill="#bcbec0"
+         d="m 2408.08,358.477 v -105.24 h -62.36 v 105.24 c 0,100.24 -81.26,181.5 -181.5,181.5 H 2007.9 l 39.41,62.36 h 116.91 c 134.68,0 243.86,-109.18 243.86,-243.86 z"
+         id="flow-shape_carbon-black" /><path
+         fill="#d1d3d4"
+         d="m 2464.1,358.477 v -105.24 h -51.02 v 105.24 c 0,134.68 -109.18,243.86 -243.86,243.86 h -121.91 l 32.24,51.02 h 89.67 c 162.86,0 294.88,-132.02 294.88,-294.88 z"
+         id="flow-shape_steel" /></g><g
+       id="flow-group_overseas-markets-products"><path
+         fill="#6e5a7a"
+         d="m 1522.36,739.927 c 0,-119.42 96.81,-216.23 216.23,-216.23 h 46.19 v 116.22 h -46.19 c -55.23,0 -100.01,44.77 -100.01,100.01 v 37.26 l -116.22,49.43 v -86.69"
+         id="flow-shape_overseas-markets-products-pt" /><path
+         fill="#b56576"
+         d="m 1738.59,421.657 h 46.19 v 102.05 h -46.19 c -119.42,0 -216.23,96.81 -216.23,216.23 v 86.69 l -25.5,10.85 -76.54,-32.55 v -65.1 c 0,-175.72 142.45,-318.16 318.16,-318.16 h 0.11 z"
+         id="flow-shape_overseas-markets-products-tt" /><path
+         fill="#e56a6f"
+         d="m 1355.12,777.187 v -37.26 c 0,-211.79 171.69,-383.47 383.47,-383.47 h 46.19 v 65.2 h -46.3 c -175.72,0 -318.16,142.45 -318.16,318.16 v 65.1 z"
+         id="flow-shape_overseas-markets-products-ot" /></g><g
+       id="flow-group_sales"><path
+         fill="#6e5a7a"
+         d="m 1355.28,1207.967 v 351.41 l 116.22,49.43 v -400.84 z"
+         id="flow-shape_andfill_pt" /><path
+         fill="#b56576"
+         d="m 1471.5,1207.967 v 400.84 l 25.5,10.85 76.55,-32.55 v -379.25 z"
+         id="flow-shape_landfill_tt" /><path
+         fill="#e56a6f"
+         d="m 1573.55,1207.857 v 379.25 l 65.19,-27.73 v -351.41 z"
+         id="flow-shape_landfill_ot" /></g><g
+       id="flow-group_retail-logistics"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="3.99, 3.99"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="M 1100.817,809.24646 1307.96,808.887 c 104.4798,-0.18131 189.18,84.7 189.18,189.18 v 41.61"
+         id="line_retail-logistics"
+         sodipodi:nodetypes="cssc" /><path
+         fill-rule="nonzero"
+         d="m 1492.15,1042.217 4.99,8.63 4.98,-8.63 z"
+         id="arrowhead_retail-logistics" /></g><g
+       id="flow-group_repair"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4.01, 4.01"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="M 1381.74,1697.247 H 1216.3 c -104.48,0 -189.18,84.7 -189.18,189.18 v 48.77"
+         id="line_repair" /><path
+         fill-rule="nonzero"
+         d="m 1386.29,1692.257 8.63,4.99 -8.63,4.99 z"
+         id="arrow_repair" /></g><g
+       id="flow-group_recovery-inefficiencies"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4, 4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="M 394.38,1132.387 H 220.31"
+         id="line_recovery-inefficiencies" /><path
+         fill-rule="nonzero"
+         d="m 221.77,1127.407 -8.64,4.98 8.64,4.99 z"
+         id="arrowhead_recovery-inefficiencies" /></g><g
+       id="flow-group_remanufacturing"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4, 4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="M 966.94,1939.207 V 896.827"
+         id="line_remanufacturing" /><path
+         fill-rule="nonzero"
+         d="m 971.93,898.287 -4.99,-8.63 -4.98,8.63 z"
+         id="arrowhead_remanufacturing" /></g><g
+       id="flow-group_feedstock-logistics-in"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4, 4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="m 997.11,570.347 v 157.98"
+         id="line_feedstock-logistics-in" /><path
+         fill-rule="nonzero"
+         d="m 992.12,726.867 4.99,8.64 4.98,-8.64 z"
+         id="arrowhead_feedstock-logistics-in" /></g><g
+       id="flow-group_resource-logistics"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4, 4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="m 997.11,251.047 v 157.98"
+         id="line_resource-logistics" /><path
+         fill-rule="nonzero"
+         d="m 992.12,407.567 4.99,8.63 4.98,-8.63 z"
+         id="arrowhead_resource-logistics" /></g><g
+       id="flow-group_reuse"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4, 4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="m 1425.09,1774.327 v 36.71 c 0,46.27 -37.51,83.78 -83.78,83.78 h -75.39 c -46.27,0 -83.78,-37.51 -83.78,-83.78 0,-46.27 37.51,-83.78 83.78,-83.78 h 121.83"
+         id="line_reuse" /><path
+         fill-rule="nonzero"
+         d="m 1386.29,1732.237 8.63,-4.99 -8.63,-4.98 z"
+         id="arrowhead_reuse" /></g><g
+       id="flow-group_refrubishment-retreading"><path
+         fill="#6e5a7a"
+         d="m 989.88,1321.567 v 617.64 h 14.46 v -617.64 c 0,-100.49 81.46,-181.95 181.95,-181.95 h 197.64 l 11,-7.23 -11,-7.23 h -197.64 c -108.48,0 -196.41,87.94 -196.41,196.41 z"
+         id="flow-shape_refrubishment-retreading_pt" /><path
+         fill="#b56576"
+         d="m 989.88,1321.567 v 617.64 h 13.59 v -617.64 c 0,-100.97 81.85,-182.82 182.82,-182.82 h 198.96 l 9.68,-6.36 -11,-7.23 h -197.64 c -108.48,0 -196.41,87.94 -196.41,196.41 z"
+         id="flow-shape_refrubishment-retreading_tt" /></g><g
+       fill-rule="nonzero"
+       id="flow-group_landfill"><path
+         fill="#6e5a7a"
+         d="M 394.38,1684.517 H 228.13 l -15,9.04 15,9.04 h 166.25 z"
+         id="flow-shape_landfill-pt" /><path
+         fill="#e56a6f"
+         d="M 394.38,1684.517 H 228.13 l -3.6,2.17 h 169.85 z"
+         id="flow-shape_landfill-ot" /><path
+         fill="#b56576"
+         d="M 394.38,1686.687 H 224.53 l -10.42,6.33 h 180.27 z"
+         id="flow-shape_landfill-tt" /></g><g
+       id="flow-group_collection-and-sorting"><path
+         fill="#e56a6f"
+         fill-rule="nonzero"
+         d="m 477.67,1828.637 c 0,113.9 92.33,206.24 206.23,206.24 h 210.82 v -3.05 H 683.9 c -112.22,0 -203.18,-90.97 -203.18,-203.19 v -40.87 l -3.05,2.56 z"
+         id="flow-shape_collection-and-sorting_ot" /><path
+         fill="#6e5a7a"
+         fill-rule="nonzero"
+         d="m 894.73,2010.757 v -14.04 H 683.91 c -92.83,0 -168.08,-75.25 -168.08,-168.08 v -38.31 l -14.04,-11.77 v 50.09 c 0,100.58 81.54,182.12 182.12,182.12 z"
+         id="flow-shape_collection-and-sorting_pt" /><path
+         fill="#b56576"
+         fill-rule="nonzero"
+         d="m 480.72,1828.637 c 0,112.22 90.97,203.19 203.18,203.19 h 210.82 v -21.07 H 683.9 c -100.58,0 -182.12,-81.54 -182.12,-182.12 v -50.09 l -5.04,-4.23 -16.02,13.44 z"
+         id="flow-shape_collection-and-sorting_tt" /></g><g
+       id="flow-group_recycling"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="4.02, 4.02"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="M 881.53,810.357 H 731.1 c -104.48,0 -189.18,84.7 -189.18,189.18 v 52.8909"
+         id="line_recycling-path"
+         sodipodi:nodetypes="cssc" /><path
+         fill-rule="nonzero"
+         d="m 886.09,805.367 8.64,4.99 -8.64,4.98 z"
+         id="arrowhead_recycling" /></g><g
+       id="flow-group_waste-to-energy"><path
+         fill="none"
+         stroke="#000000"
+         stroke-dasharray="3.98, 3.98"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         stroke-miterlimit="4"
+         d="M 220.26567,494.737 H 292.57 c 104.48,0 189.148,84.7 189.18,189.18 l 0.11286,368.463"
+         id="line_waste-to-energy"
+         sodipodi:nodetypes="cssc" /><path
+         fill-rule="nonzero"
+         d="m 219.31,499.727 -8.64,-4.99 8.64,-4.98 z"
+         id="arrowhead_waste-to-energy" /></g></g><g
+     inkscape:groupmode="layer"
+     id="group-nodes"
+     inkscape:label="nodes"><g
+       id="node-group_other-industry-sectors"><g
+         id="node-label_other-industry-sectors"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(1316.16,170.108)"
+           id="text125">Other industry</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text127"
+           x="1339.12"
+           y="184.508">sectors</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 1289.07,210.387 v -73.18 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 h -123.79 c -5.79,0 -10.49,-4.69 -10.49,-10.48 z"
+         id="node-box_other-industry-sectors" /></g><g
+       id="node-group_overseas-markets-materials"><g
+         id="node-label_overseas-markets-materials"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(2271.87,170.108)"
+           id="text137">Overseas</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text139"
+           x="2274.53"
+           y="184.508">markets</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 2227.82,210.387 v -73.18 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 h -123.79 c -5.8,0 -10.49,-4.69 -10.49,-10.48 z"
+         id="node-box_overseas-markets-materials" /></g><g
+       id="node-group_product-manufacturing"><g
+         id="node-label_product-manufacturing"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(972.12,808.89)"
+           id="text157">Product</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text159"
+           x="950.45001"
+           y="823.28998">manufacturing</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 924.73,849.167 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 935.22 c -5.8,-0.01 -10.49,-4.7 -10.49,-10.49 z"
+         id="path165" /></g><g
+       id="node-group_feedstock-production"><g
+         id="node-label_feedstock-production"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(964.89,489.585)"
+           id="text169">Feedstock</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text171"
+           x="962.65002"
+           y="503.98499">production</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 924.73,529.857 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 935.22 c -5.8,0 -10.49,-4.69 -10.49,-10.49 z"
+         id="node-box_feedstock-production" /></g><g
+       id="node-group_resource-extraction"><g
+         id="node-label_resource-extraction">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="12px"
+   font-weight="500"
+   transform="translate(968.21,170.28)"
+   id="text181">Resource</text>
+      <g
+   id="g185">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="12px"
+   font-weight="500"
+   transform="translate(965.49,184.68)"
+   id="text183">extraction</text>
+      </g>
+    </g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 924.73,210.557 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 935.22 c -5.8,0 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_resource-extraction" /></g><g
+       id="node-group_overseas-markets-products"><g
+         id="node-label_overseas-markets-products"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(1858.83,508.286)"
+           id="text193">Overseas</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text195"
+           x="1861.49"
+           y="522.68597">markets</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 1814.78,548.557 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 h -123.79 c -5.8,0 -10.49,-4.69 -10.49,-10.49 z"
+         id="node-box_overseas-markets-products" /></g><g
+       id="node-group_product-end-of-life"><g
+         id="node-label_product-end-of-life"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(972.12,2012.107)"
+           id="text205">Product</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text207"
+           x="965.02002"
+           y="2026.507">end-of-life</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 924.73,2052.387 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 935.22 c -5.8,-0.01 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_product-end-of-life" /></g><g
+       id="node-group_waste-management"><g
+         id="node-label_waste-management">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="12px"
+   font-weight="500"
+   transform="translate(476.88,1693.557)"
+   id="text217">Waste</text>
+      <g
+   id="g221">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="12px"
+   font-weight="500"
+   transform="translate(454.44,1707.957)"
+   id="text219">management</text>
+      </g>
+    </g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 424.38,1733.837 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.78 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 434.87 c -5.8,-0.01 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_waste-management" /></g><g
+       id="node-group_product-stock-in-use"><g
+         id="node-label_product-stock-in-use"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(1453.69,1693.557)"
+           id="text229">Product stock</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text231"
+           x="1478.0699"
+           y="1707.957">in-use</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 1424.77,1733.837 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.78 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 h -123.78 c -5.8,-0.01 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_product-stock-in-use" /></g><g
+       id="node-group_material-recovery"><g
+         id="node-label_material-recovery"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(471.47,1128.697)"
+           id="text241">Material</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text243"
+           x="469.95001"
+           y="1143.097">recovery</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 424.38,1168.977 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.78 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 434.87 c -5.8,0 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_material-recovery" /></g><g
+       id="node-group_product-retail"><g
+         id="node-label_product-retail"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(1472.16,1128.697)"
+           id="text253">Product</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text255"
+           x="1481.24"
+           y="1143.097">retail</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 1424.77,1168.977 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.78 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 h -123.78 c -5.8,0 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_product-retail" /></g><g
+       id="node-group_overseas-markets-export"><g
+         id="node-label_overseas-markets-export"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(79.95,2254.067)"
+           id="text391">Overseas</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text393"
+           x="82.610001"
+           y="2268.467">markets</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 35.9,2294.347 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 46.39 c -5.79,-0.01 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_overseas-markets-export" /></g><g
+       id="node-group_energy-recovery"><g
+         id="node-label_energy-recovery"><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           transform="translate(86.27,491.05)"
+           id="text503">Energy</text><text
+           font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+           font-size="12px"
+           font-weight="500"
+           id="text505"
+           x="81.489998"
+           y="505.45001">recovery</text></g><path
+         fill="none"
+         stroke="#000000"
+         stroke-width="2"
+         d="m 35.9,531.327 v -73.17 c 0,-5.79 4.69,-10.49 10.49,-10.49 h 123.79 c 5.79,0 10.49,4.69 10.49,10.49 v 73.17 c 0,5.79 -4.69,10.49 -10.49,10.49 H 46.39 c -5.79,0 -10.49,-4.7 -10.49,-10.49 z"
+         id="node-box_energy-recovery" /></g></g><g
+     inkscape:groupmode="layer"
+     id="group-legend"
+     inkscape:label="legend"
+     style="display:inline"><g
+       id="g561"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="14px"
+   font-weight="500"
+   transform="translate(6594.9,1992.7)"
+   id="text555">AUSTRALIAN CIRCULAR TYRE SYSTEM</text>
+      <g
+   id="g559">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="14px"
+   font-weight="500"
+   transform="translate(6685,2009.5)"
+   id="text557">(BASED ON 2018/19 DATA)</text>
+      </g>
+    </g><g
+       id="g569"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6760.09,2067.63)"
+   id="text563">Passenger tyres</text>
+      <g
+   id="g567">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6715.4,2078.43)"
+   id="text565">(Tyres for private vehicles)</text>
+      </g>
+    </g><g
+       id="g573"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6732.3,2202.71)"
+   id="text571">Constituent materials</text>
+    </g><g
+       id="g581"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6714.84,2240.54)"
+   id="text575">Unknown or non-existent</text>
+      <g
+   id="g579">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6701.2,2251.34)"
+   id="text577">ﬂow of products or materials</text>
+      </g>
+    </g><g
+       id="g589"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6779.78,2110.86)"
+   id="text583">Truck tyres</text>
+      <g
+   id="g587">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6690.41,2121.66)"
+   id="text585">(Tyres for commercial vehicles)</text>
+      </g>
+    </g><g
+       id="g597"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6721.24,2154.09)"
+   id="text591">Oﬀ-the-road (OTR) tyres</text>
+      <g
+   id="g595">
+        <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="9px"
+   font-weight="500"
+   transform="translate(6581.91,2164.89)"
+   id="text593">(Tyres for mining sites and heavy industry applications)</text>
+      </g>
+    </g><circle
+       cx="2393"
+       cy="2189.4299"
+       r="18.969999"
+       fill="#6e5a7a"
+       id="circle599" /><circle
+       cx="2393"
+       cy="2232.5801"
+       r="18.969999"
+       fill="#b56576"
+       id="circle601" /><circle
+       cx="2393"
+       cy="2275.72"
+       r="18.969999"
+       fill="#e56a6f"
+       id="circle603" /><circle
+       cx="2393"
+       cy="2318.8599"
+       r="18.969999"
+       fill="#d1d3d4"
+       id="circle605" /><g
+       id="g615"
+       transform="translate(-4466.56,120.21)">
+      <g
+   id="g613">
+        <path
+   fill="none"
+   stroke="#000000"
+   stroke-dasharray="4, 4"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   stroke-miterlimit="4"
+   d="m 6840.65,2241.79 h 30.63"
+   id="path607" />
+        <g
+   id="g611">
+          <path
+   fill-rule="nonzero"
+   d="m 6869.83,2246.78 8.63,-4.99 -8.63,-4.99 z"
+   id="path609" />
+        </g>
+      </g>
+    </g><g
+       id="g619"
+       transform="translate(-4466.56,120.21)">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="12px"
+   font-weight="500"
+   transform="translate(6831.5,2035.86)"
+   id="text617">Legend</text>
+    </g></g><g
+     inkscape:groupmode="layer"
+     id="group-flow-labels"
+     inkscape:label="flow-labels"><g
+       id="flow-label-group-overseas-markets-materials"><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-steel"
+         x="2129.8999"
+         y="632.63397">Steel</text><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-carbon-black"
+         x="2092.51"
+         y="575.87799">Carbon black</text><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-silica"
+         x="2129.03"
+         y="533.76099">Silica</text><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-zinc-oxide-polyester-nylon"
+         x="2031.4"
+         y="518.71399">Zinc oxide, polyester, nylon</text><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-sulphur-and-other-addititives"
+         x="2026.6801"
+         y="497.81299">Sulphur and other additives</text><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-natural-rubber"
+         x="2085.3401"
+         y="468.362">Natural rubber</text><text
+         font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+         font-size="9px"
+         font-weight="500"
+         id="flow-label-synthethic-rubber"
+         x="2076.1799"
+         y="404.638">Synthetic rubber</text></g><g
+       id="flow-label-group-feedstock-logistics">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1241.3,402.423)"
+   id="text149">Feedstock</text>
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   id="text151"
+   x="1241.3"
+   y="414.423">logistics</text>
+  </g><g
+       id="g373">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1007.11,333.622)"
+   id="text367">Resource</text>
+    <g
+   id="g371">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1007.11,345.622)"
+   id="text369">logistics</text>
+    </g>
+  </g><g
+       id="g381">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1007.11,652.927)"
+   id="text375">Feedstock</text>
+    <g
+   id="g379">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1007.11,664.927)"
+   id="text377">logistics</text>
+    </g>
+  </g><g
+       id="g389">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1099.33,787.177)"
+   id="text383">Retail</text>
+    <g
+   id="g387">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1099.33,799.177)"
+   id="text385">logistics</text>
+    </g>
+  </g><g
+       id="g405">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(254.583,2179.9)"
+   id="text403">Export</text>
+  </g><g
+       id="g409">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1599.52,1122.39)"
+   id="text407">Lost, damaged or unsold stock</text>
+  </g><g
+       id="g413">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1599.52,1662.3)"
+   id="text411">Degradation</text>
+  </g><g
+       id="g421">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1032.67,2299.43)"
+   id="text415">Littering and</text>
+    <g
+   id="g419">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1032.67,2311.43)"
+   id="text417">dumping</text>
+    </g>
+  </g><g
+       id="g425">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(701.644,1986.07)"
+   id="text423">Collection &amp; sorting</text>
+  </g><g
+       id="g437">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(516.756,1414.82)"
+   id="text427">Waste processing</text>
+    <g
+   id="g431">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(516.756,1426.82)"
+   id="text429">(shredding, granulation,</text>
+    </g>
+    <g
+   id="g435">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(516.756,1438.82)"
+   id="text433">milling)</text>
+    </g>
+  </g><g
+       id="g441">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1647.08,1414.82)"
+   id="text439">Sales</text>
+  </g><g
+       id="g445">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(214.67,1674.52)"
+   id="text443">Landﬁll</text>
+  </g><g
+       id="g449">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(214.67,1116.39)"
+   id="text447">Recovery ineﬃciencies</text>
+  </g><g
+       id="g453">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1201.46,2177.19)"
+   id="text451">Use</text>
+  </g><g
+       id="g457">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1201.46,1814.07)"
+   id="text455">Reuse</text>
+  </g><g
+       id="g461">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1047.58,1846.94)"
+   id="text459">Repair</text>
+  </g><g
+       id="g469">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1069.5,1234.11)"
+   id="text463">Refurbishment</text>
+    <g
+   id="g467">
+      <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(1069.5,1246.11)"
+   id="text465">(retreading)</text>
+    </g>
+  </g><g
+       id="g473">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(976.946,947.679)"
+   id="text471">Remanufacturing</text>
+  </g><g
+       id="g545">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(703.324,840.177)"
+   id="text543">Recycling</text>
+  </g><g
+       id="g549">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(703.325,523.703)"
+   id="text547">Down-cycling</text>
+  </g><g
+       id="g553">
+    <text
+   font-family="LucidaGrande, 'Lucida Grande', sans-serif"
+   font-size="10px"
+   font-weight="500"
+   transform="translate(214.67,515.071)"
+   id="text551">Waste-to-energy</text>
+  </g></g></svg>

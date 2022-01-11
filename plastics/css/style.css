@@ -1,0 +1,56 @@
+/****************************************************/
+/***   TYRES SYSTEM VISUALISATION STYLESHEET      ***/
+/***   -----------------------------------------  ***/
+/***   Contains material-specific styles          ***/ 
+/****************************************************/
+
+
+/* Tyre material class colours */
+.unknown-resin:not(.link-label),
+.unknown-application-area:not(.link-label){
+    fill: #d1d3d4;
+}
+
+.pet:not(.link-label){
+    fill: #355070;
+}
+.hdpe:not(.link-label){
+    fill: #565471;
+}
+.pvc:not(.link-label){
+    fill: #725971;
+}
+.ldpe-lld:not(.link-label){
+    fill: #8d5d70;
+}
+.pp:not(.link-label){
+    fill: #a86170;
+}
+.ps-eps:not(.link-label){
+    fill: #c5656f;
+}
+.other-material:not(.link-label){
+    fill: #e56a6f;
+}
+
+.agriculture:not(.link-label){
+    fill: #42a79b;
+}
+.automotive:not(.link-label){
+    fill: #3f9693;
+}
+.built-environment:not(.link-label){
+    fill: #3d878c;
+}
+.electrical-and-electronic:not(.link-label){
+    fill: #3b7885;
+}
+.consumer-packaging:not(.link-label){
+    fill: #396a7e;
+}
+.c-and-i-packaging:not(.link-label){
+    fill: #375d77;
+}
+.other-product:not(.link-label){
+    fill: #355070;
+}

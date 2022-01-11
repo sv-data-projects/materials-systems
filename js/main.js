@@ -14,15 +14,19 @@ const api = {           // References for data table links for each table used (
             nodes:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=0&single=true&output=tsv',
             links:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=1426394391&single=true&output=tsv',
             scenes:         'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=720144192&single=true&output=tsv'
+        },
+        'Plastics' : {
+            nodes:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=1416008378&single=true&output=tsv',
+            links:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=1423640588&single=true&output=tsv',
+            scenes:         'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHoQf6l-y393B5UFWEPYgBKQTIxti_7i5YlUCZW-rVd8yqiCz2UKlR31B-Y3YiiSzmTF_gpUA3uASw/pub?gid=1983312551&single=true&output=tsv'
         }
     }
 }
 
 const data = {}         // Object to store loaded/parsed data
 
-const settings = {           // Visualisation settings
-    material:           'Tyres',
-    svgID:              'tyres-system',
+const settings = {      // Visualisation settings
+    svgID:              'system-vis',
     svgDims:            {},
     layout: {                // Object to store default layout options (updated if settings are sent via query string)
         dynamicLabels:  true, 
@@ -61,6 +65,7 @@ function buildFromGSheetData(settings) {
         return data
 
     }).then( async (data) => {
+
         // 3. Initiate vis build sequence with data now loaded
         await applyUserQuerySettings(settings)                                                   // a. Apply query string settings
         await getSVGData()                                                                      // b. Extract source SVG data
@@ -120,6 +125,7 @@ function buildFromGSheetData(settings) {
 
         // 1. NODES: setup node groups. boxes and labels 
         for (const node of nodeData){
+
             // a. Add node group and box classes
             const nodeGroup = d3.select(`#node-group_${node.nodeID}`)
                     .attr('class', `node ${node.systemClass} ${node.spatialClass}`)
@@ -187,8 +193,7 @@ function buildFromGSheetData(settings) {
                 case 'flow-shape':
                     d3.select(`#flow-shape_${link.linkID}`)
                         .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
-                        .attr('fill', null)
-                    
+                        .attr('fill', null)                    
                     break
 
                 case 'line':
@@ -203,7 +208,6 @@ function buildFromGSheetData(settings) {
                     d3.select(`#arrowhead_${link.linkID}`)
                         .attr('class', `link arrowhead ${link.linkShapeClass}  ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
                         .attr('fill', null)
-
                     break
 
                 default:
@@ -254,11 +258,12 @@ function buildFromGSheetData(settings) {
                     .style('opacity', settings.animation.fadeOpacity)
 
                 if(inputData.links.length > 0){
-                    const nodeGroupArray = inputData.links.map(d => d.slice(0, d.indexOf('_')) )
+                    const nodeGroupArray = [...new Set(inputData.links.map(d => d.slice(0, d.indexOf('_')) ))]
                     const linksInSelection = inputData.links.map(d => `#flow-group_${d}`)
                         .concat(inputData.links.map(d => `#flow-shape_${d}`))
                         .concat(inputData.links.map(d => `#flow-group_${d} path`))
                         .concat(inputData.links.map(d => `#flow-label_${d}`))
+                        .concat(nodeGroupArray.map(d => `#flow-label_${d}`))
                         .concat(inputData.links.map(d => `#flow-label_${d} text`))
                         .concat(inputData.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
                         .concat(inputData.nodes.map(d => `#node-group_${d}`))
@@ -270,11 +275,12 @@ function buildFromGSheetData(settings) {
                 }
 
                 if(outputData.links.length > 0){
-                    const nodeGroupArray = outputData.links.map(d => d.slice(0, d.indexOf('_')) )
+                    const nodeGroupArray = [...new Set(outputData.links.map(d => d.slice(0, d.indexOf('_')) ))]
                     const linksOutSelector = outputData.links.map(d => `#flow-group_${d}`)
                         .concat(outputData.links.map(d => `#flow-shape_${d}`))
                         .concat(outputData.links.map(d => `#flow-group_${d} path`))
                         .concat(outputData.links.map(d => `#flow-label_${d}`))
+                        .concat(nodeGroupArray.map(d => `#flow-label_${d}`))
                         .concat(outputData.links.map(d => `#flow-label_${d} text`))
                         .concat(outputData.links.map((d, i) => `#flow-label_${nodeGroupArray[i]} text`))
                         .concat(outputData.links.map((d, i) => `#node-group_${nodeGroupArray[i]}`))
@@ -286,7 +292,7 @@ function buildFromGSheetData(settings) {
                 }
             }; // end highlightNodeInsOuts()
 
-            scene.methods.highlighLinkNodes = (link) => {
+            scene.methods.highlightLinkNodes = (link) => {
                 // i. Fade all elements (apart from selected link) 
                 if( link.classList.contains('line')){
                     d3.selectAll(`.link-group.line:not(#${link.id}), .link-group.flow-shape, .node`)
@@ -307,7 +313,7 @@ function buildFromGSheetData(settings) {
                     .transition().duration(0)
                     .style('opacity', null)
 
-            }; // end highlighLinkNodes
+            }; // end highlightLinkNodes
 
             scene.methods.nodeClick = function() {
                 const nodeData = this.__data__
@@ -338,7 +344,7 @@ function buildFromGSheetData(settings) {
 
             scene.methods.linkMouseover = function() {
                 // i Highlight link and to/from nodes
-                scene.methods.highlighLinkNodes(this)
+                scene.methods.highlightLinkNodes(this)
 
             }; // end linkMouseover()
 
@@ -346,7 +352,7 @@ function buildFromGSheetData(settings) {
                 const linkData = this.__data__
 
                 // i Highlight link and to/from nodes, set overlay and interactivity
-                scene.methods.highlighLinkNodes(this)
+                scene.methods.highlightLinkNodes(this)
                 scene.methods.renderOverlay(linkData.label, linkData.description)
                 scene.methods.openOverlay()
                 scene.methods.clearNodeLinkMouseover()

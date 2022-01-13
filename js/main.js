@@ -225,23 +225,32 @@ function buildFromGSheetData(settings) {
             }
         }
 
-        // 3. LEGEND: setup the svg legend elements 
-        d3.selectAll('#group-legend * text:not(#legend-title), #group-legend g g')
-            .attr('font-size', null)
-            .attr('font-family', null)
-            .attr('font-weight', null)
-            .classed('legend-label', true)
-        d3.select('#legend-title')
-            .classed('legend-item', true)
-        d3.selectAll('#group-legend g')
-            .attr('class', function(d){ 
-                return `legend-item legend-group ${this.id.slice(this.id.indexOf('_') + 1)}`
-            })
-        d3.selectAll('#group-legend * circle')
-            .attr('fill', null)
-            .attr('class', function(d){ 
-                return `legend-item legend-dot ${this.id.slice(this.id.indexOf('_') + 1)}`
-            })
+        // 3. LEGEND: setup the svg legend elements for control by JS/CSS (note: all elements given legend-item class)
+            // a. Restyle title by CSS class
+            d3.select('#legend-title')
+                .attr('font-size', null)
+                .attr('font-family', null)
+                .attr('font-weight', null)
+                .classed('legend-item', true)
+
+            // b. Restyle legend label text and any groups holding multiple lines of label text by CSS class
+            d3.selectAll('#group-legend * text:not(#legend-title), #group-legend g g')
+                .attr('font-size', null)
+                .attr('font-family', null)
+                .attr('font-weight', null)
+                .classed('legend-label', true)
+
+            d3.selectAll('#group-legend g')
+                .attr('class', function(d){ 
+                    return `legend-item legend-group ${this.id.slice(this.id.indexOf('_') + 1)}`
+                })
+
+            // c. Restyle each legend dot with CSS class
+            d3.selectAll('#group-legend * circle')
+                .attr('fill', null)
+                .attr('class', function(d){ 
+                    return `legend-item legend-dot ${this.id.slice(this.id.indexOf('_') + 1)}`
+                })
     
 
         // 4. INTERACTIVITY: add Node and link interactivity
@@ -345,7 +354,8 @@ function buildFromGSheetData(settings) {
 
             }; // end highlightLinkNodes
 
-            scene.methods.nodeClick = function() {
+            scene.methods.nodeClick = function(event) {
+                event.stopPropagation()
                 const nodeData = this.__data__
 
                 // i. Highlight links in and out, set overlay and interactivity
@@ -370,6 +380,8 @@ function buildFromGSheetData(settings) {
                     zoom = 0.85 * d3.min([settings.svgDims.height / height , settings.svgDims.width / width])        
                 
                 scene.methods.setZoom(panX, panY, zoom)    
+
+
             }; // end nodeClick()
 
             scene.methods.linkMouseover = function() {
@@ -378,7 +390,8 @@ function buildFromGSheetData(settings) {
 
             }; // end linkMouseover()
 
-            scene.methods.linkClick = function() {
+            scene.methods.linkClick = function(event) {
+                event.stopPropagation()
                 const linkData = this.__data__
 
                 // i Highlight link and to/from nodes, set overlay and interactivity
@@ -454,6 +467,13 @@ function buildFromGSheetData(settings) {
 
             scene.methods.openOverlay = () => {
                 d3.select('.overlay-pane').classed('open', true)
+
+                // Add reset event for SVG
+                scene.els.svg.on('click', () => {
+                    scene.methods.closeOverlay() 
+                    scene.els.svg.on('click', null)
+                })
+
             };  // end openOverlay()
 
             d3.select('.overlay-close-button')
@@ -501,27 +521,8 @@ function buildFromGSheetData(settings) {
             d3.select('.stepper-container nav li:first-child').classed('step-current', true)
 
 
-        // 3. Add scene nav interactivity
-        d3.selectAll('.step-item')  
-            .on('click', function(){
-                // Update nav selection
-                d3.selectAll('.stepper-nav li').classed('step-current', false).attr('aria-selected', false)	
-                d3.select(this).classed('step-current', true).attr('aria-selected', true)
-                // Update scene view/narrative
-                const sceneDatum = this.__data__,
-                    panX = sceneDatum.panX * settings.svgDims.width,
-                    panY = sceneDatum.panY * settings.svgDims.height            
-                updateNarrative(sceneDatum)         // Update title and narrative
-                updateVisibility(sceneDatum)        // Update visible components
-
-                scene.methods.setZoom(panX, panY, sceneDatum.zoomScale)         // Update the zoom framing
-                // Close any overlays (without resetting zoom)
-                scene.methods.closeOverlay(false)
-                scene.methods.clearNodeLinkMouseover()              // Stop mouseover 
-            })
-
-            // X. Helper functions for scene
-            function updateNarrative(sceneDatum, duration = 1000){
+        // 3. Scene interactivity helpers methods
+            scene.methods.updateSceneNarrative = function(sceneDatum, duration = 1000){
                 d3.selectAll('#narrative-title, #narrative-container')
                     .transition().duration(duration * 0.25)
                         .style('opacity', 0)
@@ -534,7 +535,8 @@ function buildFromGSheetData(settings) {
                 }, duration * 0.25);
             }; // end updateNarrative()
 
-            function updateVisibility(sceneDatum, duration = 1000){
+
+            scene.methods.updateSceneVisibility = function(sceneDatum, duration = 1000){
                 if(sceneDatum['visible-selection'] !== ''){
                     d3.selectAll('.node, .link, .link-label, .legend-item')
                         .transition().duration(duration)
@@ -546,11 +548,67 @@ function buildFromGSheetData(settings) {
                 }
             }; // end updateVisibility()
 
+            scene.methods.zoomToELements = function(nodeArray, zoomFactor = 0.925, duration = 1000){
+                const nodeBBoxArray = nodeArray.map( d => d.getBBox()),
+                    topLeft =       [d3.min(nodeBBoxArray.map(d => d.x)), d3.min(nodeBBoxArray.map(d => d.y))] 
+                    bottomRight =   [d3.max(nodeBBoxArray.map(d => d.x + d.width)),  d3.max(nodeBBoxArray.map(d => d.y + d.height))],
+                    height =        bottomRight[1] - topLeft[1],
+                    width =         bottomRight[0] - topLeft[0],
+                    panX =          d3.mean([bottomRight[0], topLeft[0]]),
+                    panY =          d3.mean([bottomRight[1], topLeft[1]]),
+                    zoom =          zoomFactor * d3.min([settings.svgDims.height / height , settings.svgDims.width / width])        
+
+                scene.methods.setZoom(panX, panY, zoom)    
+            }; // end zoomToElements
+        // 3. Add scene nav interactivity
+
+
+        d3.selectAll('.step-item')  
+            .on('click', function(){
+                // Update nav selection
+                d3.selectAll('.stepper-nav li').classed('step-current', false).attr('aria-selected', false)	
+                d3.select(this).classed('step-current', true).attr('aria-selected', true)
+                // Update scene view/narrative
+                const sceneDatum = this.__data__,
+                    panX = sceneDatum.panX * settings.svgDims.width,
+                    panY = sceneDatum.panY * settings.svgDims.height       
+     
+                scene.methods.updateSceneNarrative(sceneDatum)         // Update title and narrative
+                scene.methods.updateSceneVisibility(sceneDatum)        // Update visible components
+
+                switch(sceneDatum.zoomType.toLowerCase()){
+                    case 'auto':    // Auto zoom to selected (non-text) elements
+                        scene.methods.zoomToELements(
+                            d3.selectAll(sceneDatum['visible-selection']).nodes().filter(d => d.tagName !== 'text')
+                        )       
+                        break
+
+                    case 'custom':  // Update the zoom framing
+                        const customSettings = JSON.parse(sceneDatum.customZoom),
+                            panX = customSettings.panX * settings.svgDims.width,
+                            panY = customSettings.panY * settings.svgDims.height    
+
+                        scene.methods.setZoom(panX, panY, customSettings.zoomScale)        
+                        break
+
+                    case 'none':
+                    case 'reset':
+                    case 'default':
+                    default:
+                        scene.methods.resetZoom()
+
+                }
+
+                // Close any overlays (without resetting zoom)
+                scene.methods.closeOverlay(false)
+                scene.methods.clearNodeLinkMouseover()              // Stop mouseover 
+            })
+
 
         // 4. Set initial scene
         const initSceneDatum = document.getElementById(`nav-item-${state.scene}`).__data__
-        updateNarrative(initSceneDatum)
-        updateVisibility(initSceneDatum)  
+        scene.methods.updateSceneNarrative(initSceneDatum)
+        scene.methods.updateSceneVisibility(initSceneDatum)  
         d3.select(`#nav-item-${state.scene}`).classed('selected', true)
 
 

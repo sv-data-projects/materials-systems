@@ -5,7 +5,7 @@
 /****************************************************/
 
 
-/* Tyre material class colours */
+/* Tyre material and product class colours */
 .unknown-resin:not(.link-label),
 .unknown-application-area:not(.link-label){
     fill: #d1d3d4;

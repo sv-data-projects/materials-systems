@@ -196,7 +196,7 @@ h1, h2{
         .narrative-pane{
             grid-area: narrative; 
             z-index: 2;
-            max-height: 62.5vh;
+            height: 60vh;
             overflow: scroll;
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */

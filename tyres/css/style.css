@@ -12,6 +12,9 @@
 .constituent-material.dark:not(.link-label){
     fill: #bcbec0;
 }
+.constituent-material text{
+    fill: var(--xCharcoal)
+}
 .passenger-tyres:not(.link-label){
     fill: #6e5a7a;
 }

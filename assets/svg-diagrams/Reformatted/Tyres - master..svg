@@ -49,7 +49,7 @@
      inkscape:window-x="0"
      inkscape:window-y="38"
      inkscape:window-maximized="0"
-     inkscape:current-layer="group-legend"
+     inkscape:current-layer="legend-material-group_constuent-material"
      showguides="true"
      inkscape:guide-bbox="true"><sodipodi:guide
        position="2248.8999,287.62512"
@@ -850,7 +850,7 @@
            id="legend-dot_off-road-tyres" /></g><g
          id="legend-material-group_constuent-material"
          transform="translate(-66.000101,29.999956)"><g
-           id="legend-label_constituent-materials"
+           id="legend-label_constituent-material"
            transform="translate(-36.000056,7.9999888)"><text
              font-family="LucidaGrande, 'Lucida Grande', sans-serif"
              font-size="9px"
@@ -861,7 +861,7 @@
            cy="2326.8599"
            r="18.969999"
            fill="#d1d3d4"
-           id="legend-dot_constituent-materials" /></g><g
+           id="legend-dot_constituent-material" /></g><g
          id="legend-line-group_unknown-flow"
          transform="translate(-66.000101,39.999941)"><g
            id="legend-label_unknown-flow"><text

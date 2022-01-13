@@ -52,8 +52,6 @@ const state = {         // Object to store application state
 }
 
 // 1.  VISUALISATION BUILD FUNCTION  
-
-
 function buildFromGSheetData(settings) {
     // 2. Asynchronous data load (with Promise.all) and D3 (Fetch API): references the shared "api" object for links to specific data tables
     Promise.all(
@@ -169,6 +167,12 @@ function buildFromGSheetData(settings) {
                     node.input.nodes.push(link['nodeID-from'])
                 }
             }
+
+            // d. Attach link classes to nodes (to and from)
+            const allLinksClass = node.output.links.concat(node.input.links).map(d => d.slice(d.indexOf('_') + 1))
+            for( const className of allLinksClass){
+                nodeGroup.classed(className, true)
+            }
         }
 
         // 2. LINKS: setup link groups and lines/arrowheads/shapes  
@@ -178,7 +182,9 @@ function buildFromGSheetData(settings) {
     
             // b. Bind data: manually attach data to the link/flow group (for accessing on link or label hover)
             d3.select(`#flow-group_${link.groupID}`)
-                .classed('link-group', true)
+                .attr('class', function(d){ 
+                    return `link-group ${this.id.slice(this.id.indexOf('_') + 1)}`
+                })
                 .data([link])
 
             // c. Link label (group) => remove inline styling (on text elements) and add classes to control styling via CSS 
@@ -197,6 +203,9 @@ function buildFromGSheetData(settings) {
                     break
 
                 case 'line':
+                    d3.select(`#flow-group_${link.linkID}`)
+                        .classed('unknown-flow', true)
+
                     d3.select(`#line_${link.linkID}`)
                         .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
                         .attr('fill', null)
@@ -216,8 +225,26 @@ function buildFromGSheetData(settings) {
             }
         }
 
-        // 3. INTERACTIVITY: add Node and link interactivity
+        // 3. LEGEND: setup the svg legend elements 
+        d3.selectAll('#group-legend * text:not(#legend-title), #group-legend g g')
+            .attr('font-size', null)
+            .attr('font-family', null)
+            .attr('font-weight', null)
+            .classed('legend-label', true)
+        d3.select('#legend-title')
+            .classed('legend-item', true)
+        d3.selectAll('#group-legend g')
+            .attr('class', function(d){ 
+                return `legend-item legend-group ${this.id.slice(this.id.indexOf('_') + 1)}`
+            })
+        d3.selectAll('#group-legend * circle')
+            .attr('fill', null)
+            .attr('class', function(d){ 
+                return `legend-item legend-dot ${this.id.slice(this.id.indexOf('_') + 1)}`
+            })
+    
 
+        // 4. INTERACTIVITY: add Node and link interactivity
             // a. Setup interactivity methods
             scene.methods.setNodeLinkInteractions = () => {
                 d3.selectAll('.link-group')
@@ -227,6 +254,9 @@ function buildFromGSheetData(settings) {
                     .on('mouseover', scene.methods.nodeMouseover)
                     .on('click', scene.methods.nodeClick )
                 d3.selectAll('.node, .link-group')
+                    .on('mouseout', scene.methods.resetVisibility)
+                d3.selectAll('.legend-group')
+                    .on('mouseover', scene.methods.highlightLegendClass)   
                     .on('mouseout', scene.methods.resetVisibility)
             }; // end setNodeLinkInteractions()
 
@@ -379,6 +409,16 @@ function buildFromGSheetData(settings) {
 
             }; // end linkClick()
 
+            scene.methods.highlightLegendClass = function(){
+                if(this.classList[2] !== 'unknown-flow'){
+                    d3.selectAll(`.flow-shape:not(.${this.classList[2]}), .node:not(.${this.classList[2]}), .link-group.unknown-flow`)
+                        .style('opacity', 0)
+                } else {
+                    d3.selectAll(`.flow-shape`)
+                        .style('opacity', 0)
+                }
+            }; // end highlightLegendClass()
+
             scene.methods.resetVisibility = () => {
                 // Reset visibility
                 d3.selectAll(`.flow-shape, .link-group, .link-group path, .node, text.link-label`)
@@ -418,7 +458,6 @@ function buildFromGSheetData(settings) {
 
             d3.select('.overlay-close-button')
                 .on('click', scene.methods.closeOverlay )
-
 
     }; // end setupNodeLinkComponents()
 
@@ -497,8 +536,7 @@ function buildFromGSheetData(settings) {
 
             function updateVisibility(sceneDatum, duration = 1000){
                 if(sceneDatum['visible-selection'] !== ''){
-                    d3.selectAll('.node, .link, .link-label')
-                        // .style('pointer-events', 'none')
+                    d3.selectAll('.node, .link, .link-label, .legend-item')
                         .transition().duration(duration)
                         .style('opacity', sceneDatum['fade-opacity'])
 
@@ -567,15 +605,16 @@ function buildFromGSheetData(settings) {
             .style('opacity', null)
 
         // Hide the svg-legend (temp)
-        scene.els.svgLegend.style('opacity', 0)
+        // scene.els.svgLegend.style('opacity', 0)
 
     }; // end renderVis()
 
 
 
 
-
-//  HELPER METHODS
+///////////////////////////////
+/////   HELPER METHODS    /////
+///////////////////////////////
 
 const helpers= {
     slugify: function (str) {

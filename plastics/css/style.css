@@ -10,6 +10,10 @@
 .unknown-application-area:not(.link-label){
     fill: #d1d3d4;
 }
+.unknown-application-area text,
+.unknown-resin text{
+    fill: var(--xCharcoal)
+}
 
 .pet:not(.link-label){
     fill: #355070;

@@ -196,6 +196,13 @@ h1, h2{
         .narrative-pane{
             grid-area: narrative; 
             z-index: 2;
+            max-height: 62.5vh;
+            overflow: scroll;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .narrative-pane::-webkit-scrollbar {
+            display: none;
         }
         .vis-pane{
             grid-area: vis;
@@ -396,4 +403,21 @@ h1, h2{
 .node-box,
 .link.line{
     stroke:            var(--xCharcoal);
+}
+
+/* Legend styling */
+#group-legend {
+    font-weight: 100;
+    fill:  var(--xCharcoal);
+}
+#legend-title{
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.legend-label{
+    font-size: 16px;
+}
+.legend-group{
+    cursor: pointer
 }

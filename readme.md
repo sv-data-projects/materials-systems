@@ -1,6 +1,6 @@
 # Materials systems visualisations
 ## TL;DR
-- Link to GitHub pages hosted [menu page](https://sv-data-projects.github.io/materials-system)  
+- Link to GitHub pages hosted [menu page](https://sv-data-projects.github.io/materials-systems)  
 - Link to placeholder [visualisation index page](https://sv-data-projects.github.io/materials-systems/)
   - [Tyres prototype](https://sv-data-projects.github.io/materials-systems/tyres/)
   - [Plastics prototype](https://sv-data-projects.github.io/materials-systems/plastics/)

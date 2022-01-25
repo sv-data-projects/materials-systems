@@ -1,10 +1,10 @@
 # MATERIALS SYSTEM VISUALISATION
 ## TL;DR
 - Link to GitHub pages hosted [menu page](https://sv-data-projects.github.io/materials-systems)  
-- Link to placeholder [visualisation index page](https://sv-data-projects.github.io/materials-systems/)
+- Link to placeholder [visualisation index page](https://sv-data-projects.github.io/materials-systems/) and direct links to:
   - [Tyres prototype](https://sv-data-projects.github.io/materials-systems/tyres/)
   - [Plastics prototype](https://sv-data-projects.github.io/materials-systems/plastics/)
-- Link to [supporting data](https://docs.google.com/spreadsheets/d/1hrwNUVpjX_990lH1BuGyu3-8AxauoPYknTgJDSGfQ3I)
+- Link to [supporting data](https://docs.google.com/spreadsheets/d/1hrwNUVpjX_990lH1BuGyu3-8AxauoPYknTgJDSGfQ3I) for all material visualisations
 
 &nbsp;
 # CONTENTS
@@ -148,13 +148,38 @@ The repository is stored under the [sv-data-projects organisational GitHub accou
 # DESIGN CONSIDERATIONS
 [Return to contents](#contents)
 
+## i. Visual style
 **TBC on completion / finalisation of design.** 
 
-These notes will be provided as basic reference for design decisions and limitations encountered. Will include:
+These notes will be provided as basic reference for design decisions and limitations encountered. It will include:
 - SVG layout and aspect ratio (1:1) as a more flexible ratio for more screens and orientations
-- Streamlining of SVG components (node and link groupings)
 - Tradeoffs for visual accessibility due to the complexity of the 'systems template', e.g. label text size; and static visual vs interactive pan and zoom.
-- Rationale for choice of (categorical) colour palette for flows (e.g. a complementary range that doesn't include hues close to green due to its contextual meaning in waste and resource recovery).
+- Rationale for choice of (categorical) colour palette for flows (e.g. a complementary range that doesn't include hues close to green due to its contextual meaning in waste and resource recovery etc.).
+- Typographic styling choices
+
+&nbsp;
+> **CSS is used for all visual styling**
+>
+> It is important to note the colour and typographic styling is done though CSS. This
+
+&nbsp;
+## ii. Mobile support and responsiveness
+The prototype **does not** cater for a mobile UI. Further UI design work is required here (i.e. outside the scope of the prototype work).
+There are multiple issues that will need to be considered for a 'mobile optimised' experience that are mainly concerned with the lack of screen space to displace 'whole of system' views, particularly alongside mobile legible text for narrative.
+
+> Given the information density of each systems diagram and narrative, Serious consideration should be given to not providing a mobile (small screen) version, or potentially providing a text only experience (as the main challenge is showing both visual and accompanying text).
+
+Note: the general 'desktop' UI layout for the prototype are built with CSS grid and have been designed to be able be restacked for a medium-large portrait screen layout (e.g. a tablet). This work however - including all device testing - is not considered in scope for the prototype.
+
+
+&nbsp;
+## iii. Accessibility 
+The prototype **is not** optimised for screen reader accessibility, and is constrained by the original SVG diagram layout with respect to text size options. 
+
+
+>  **A note on SVG (and general) accessibility**
+>
+> Although SVGs are native HTML DOM elements (making them technically 'readable' for screen readers), more effort is required to make  visualisations accessible for screen readers and keyboard-only users.  This includes making appropriate `Title` and `Description` tags (that do not not clash with teh visualsations UI events),  as well programming appropriate reference attributes and [WCAG ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
 
 &nbsp;
 

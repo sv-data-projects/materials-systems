@@ -29,12 +29,13 @@ const settings = {      // Visualisation settings
     svgID:              'system-vis',
     svgDims:            {},
     layout: {                // Object to store default layout options (updated if settings are sent via query string)
-        dynamicLabels:  true, 
-        applyCSS:       true,
-        showHeader:     true,
+        showHeader:         true,
+        showContentPane:    true,
+        showScenePane:      true,
     },
     lists: {
-        sceneIDs:       ''  // Scene IDs added on load of scene data
+        sceneIDs:       '',     // Scene IDs added on load of scene data
+        linkLabels:     []      // Array for checking unique labels for rendering 
     }, 
     animation: {
         sceneDuration:  1200,
@@ -44,7 +45,7 @@ const settings = {      // Visualisation settings
 
 const scene = {         // Object to store scene element references and data methods
     els: {},
-    methods: {} 
+    methods: {},
 }   
 
 const state = {         // Object to store application state
@@ -56,31 +57,28 @@ function buildFromGSheetData(settings) {
     // 2. Asynchronous data load (with Promise.all) and D3 (Fetch API): references the shared "api" object for links to specific data tables
     Promise.all(
         Object.values(api.gsTableLinks[settings.material]).map(link => d3.tsv(link))       // Pass in array of d3.tsv loaders with each link
+
     ).then( rawData => {
-        // a. Parse each loaded data table and store in data.[materialName] object, using the parseTable helper 
+        //  Parse each loaded data table and store in data.[materialName] object, using the parseTable helper 
         data[settings.material] = {} 
         rawData.forEach((tableData, i) => {  parseTable(Object.keys(api.gsTableLinks[settings.material])[i], tableData) })
         return data
 
     }).then( async (data) => {
-
         // 3. Initiate vis build sequence with data now loaded
-        await applyUserQuerySettings(settings)                                                   // a. Apply query string settings
-        await getSVGData()                                                                      // b. Extract source SVG data
-        await setupNodeLinkComponents(data[settings.material].nodes, data[settings.material].links)    // c. Parse data
-        await setupScenes(data[settings.material].scenes)                                           // c. Render visualisation(s)
-        await revealVis()                                                                   // c. Render visualisation(s)
+        await applyUserQuerySettings(settings)                                                          // I. Apply query string settings
+        await getSVGData()                                                                              // II. Extract source SVG data
+        await setupNodeLinkComponents(data[settings.material].nodes, data[settings.material].links)     // III. Parse data
+        await setupScenes(data[settings.material].scenes)                                               // IV. Render visualisation
+        await revealVis()                                                                               // V. Reveal visualisation
     })
 
-    // X. Table data parsing function: trim() header white space and prase numbers with "$" and "," stripped. 
+    // X. Table data parsing function: currently no cases  
     const parseTable = (tableName, tableData) => {
         data[settings.material][tableName] = tableData.map(row => {
             const newObj = {}
             Object.entries(row).forEach(([key, value]) => {
-                switch(key.trim().toLowerCase()){
-                    case 'year':
-                        newObj[key.trim()] =  value
-                        break     
+                switch(key.trim().toLowerCase()){ 
                     default:
                         newObj[key.trim()] = isNaN(parseFloat(value.replace(/\$|,/g, ''))) ? value : parseFloat(value.replace(/\$|,/g, '')) 
                 }
@@ -90,15 +88,28 @@ function buildFromGSheetData(settings) {
     };   
 };
 
+//////////////////////////////////
+/////   VIS BUILD METHODS    /////
+//////////////////////////////////
+
     // I. Apply user options
     async function applyUserQuerySettings(settings){
         console.log('Applying query string to vis settings...')
-        // i. Check for query parameters and update settings
+        // i. Check for query parameters and update layout settings
         const queryParameters = new URLSearchParams(window.location.search)
-        if (queryParameters.has('showHeader')) { 
-            settings.layout.showHeader = queryParameters.get('showHeader') === 'false' ? false : true
-            d3.select('.page-container').classed('hideHeader', !settings.layout.showHeader)
+        if (queryParameters.has('hideHeader')) { 
+            settings.layout.showHeader = queryParameters.get('hideHeader') === 'false' ? false : true
+            d3.select('.page-container').classed('hideHeader', settings.layout.showHeader)
         }
+        if (queryParameters.has('hideContentPane')) { 
+            settings.layout.showContentPane = queryParameters.get('hideContentPane') === 'false' ? false : true
+            d3.select('.page-container').classed('hideContentPane', settings.layout.showContentPane)
+        }
+        if (queryParameters.has('hideScenePane')) { 
+            settings.layout.showScenePane = queryParameters.get('hideScenePane') === 'false' ? false : true
+            d3.select('.page-container').classed('hideScenePane', settings.layout.showScenePane)
+        }
+
     }; // end applyUserQuerySettings()
 
 
@@ -135,17 +146,16 @@ function buildFromGSheetData(settings) {
             node.groupID  = node.nodeID.indexOf('_') < 0 ? node.nodeID : node.nodeID.slice(0, node.nodeID.indexOf('_') )
 
             // b. Re-style node box and label (by removing existing SVG label and re-attaching) with CSS classes
-            if(settings.layout.applyCSS){   
-                ["fill", "stroke", "stroke-width"].forEach(attr => document.getElementById(`node-box_${node.nodeID}`).removeAttribute(attr) )
+            ["fill", "stroke", "stroke-width"].forEach(attr => document.getElementById(`node-box_${node.nodeID}`).removeAttribute(attr) )
 
-                d3.select(`#node-label_${node.nodeID}`).remove()
-                nodeGroup.append('text').classed('node-label', true)
-                    .attr('x', nodeBBox.x + nodeBBox.width * 0.5)
-                    .attr('y', nodeBBox.y + nodeBBox.height * 0.5)
-                    .attr('dy', 0)
-                    .text(node.label)
-                    .call(helpers.wrap, nodeBBox.width * 0.85, 1.1, true)
-            }
+            d3.select(`#node-label_${node.nodeID}`).remove()
+            nodeGroup.append('text').classed('node-label', true)
+                .attr('x', nodeBBox.x + nodeBBox.width * 0.5)
+                .attr('y', nodeBBox.y + nodeBBox.height * 0.5)
+                .attr('dy', 0)
+                .text(node.label)
+                .call(helpers.wrap, nodeBBox.width * 0.85, 1.1, true)
+            
 
             // c. Find links in and out of the node
             node.input = {
@@ -188,18 +198,23 @@ function buildFromGSheetData(settings) {
                 .data([link])
 
             // c. Link label (group) => remove inline styling (on text elements) and add classes to control styling via CSS 
-            d3.selectAll(`#flow-label_${link.groupID}, #flow-label_${link.groupID} text`)
+            d3.selectAll(`#flow-label_${link.groupID} tspan`)   // Clear tspan ids and classes
+                .attr('id', null)
+                .attr('class', null)
+
+            d3.selectAll(`#flow-label_${link.groupID}`) 
                 .classed(`link-label  ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`, true)
                 .attr('font-family', null)
                 .attr('font-size', null)
                 .attr('font-weight', null)
+
 
             // d. Link shapes: and lines/arrows => remove inline styling and add classes to control styling via CSS 
             switch( link.linkTypeClass){
                 case 'flow-shape':
                     d3.select(`#flow-shape_${link.linkID}`)
                         .attr('class', `link ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`)
-                        .attr('fill', null)                    
+                        .attr('fill', null)  
                     break
 
                 case 'line':
@@ -224,6 +239,7 @@ function buildFromGSheetData(settings) {
                     console.log(link.linkID)
             }
         }
+
 
         // 3. LEGEND: setup the svg legend elements for control by JS/CSS (note: all elements given legend-item class)
             // a. Restyle title by CSS class
@@ -380,8 +396,6 @@ function buildFromGSheetData(settings) {
                     zoom = 0.85 * d3.min([settings.svgDims.height / height , settings.svgDims.width / width])        
                 
                 scene.methods.setZoom(panX, panY, zoom)    
-
-
             }; // end nodeClick()
 
             scene.methods.linkMouseover = function() {
@@ -504,17 +518,17 @@ function buildFromGSheetData(settings) {
                     .html(d => d['scene-menu-title'])
 
             // a. Append CSS rules for stepper
-                const style = document.createElement('style');
-                settings.lists.sceneIDs.forEach( (sceneID, i) => {
-                    style.innerHTML += `
-                        .stepper-container nav li:nth-child(${i+1}).step-current ~ li:last-child::before {
-                            -webkit-transform: translate3d(-${(settings.lists.sceneIDs.length-(i+1))*100}%,0,0);
-                            transform: translate3d(-${(settings.lists.sceneIDs.length-(i+1))*100}%,0,0);
-                        }
-                    `
-                })
-                const ref = document.querySelector('script');
-                ref.parentNode.insertBefore(style, ref);
+            const style = document.createElement('style');
+            settings.lists.sceneIDs.forEach( (sceneID, i) => {
+                style.innerHTML += `
+                    .stepper-container nav li:nth-child(${i+1}).step-current ~ li:last-child::before {
+                        -webkit-transform: translate3d(-${(settings.lists.sceneIDs.length-(i+1))*100}%,0,0);
+                        transform: translate3d(-${(settings.lists.sceneIDs.length-(i+1))*100}%,0,0);
+                    }
+                `
+            })
+            const ref = document.querySelector('script');
+            ref.parentNode.insertBefore(style, ref);
 
 
             // b. Set first scene as selected by default
@@ -655,7 +669,7 @@ function buildFromGSheetData(settings) {
     }; // end setupScenes()
 
 
-    // V. Start vis
+    // V. Reveal vis on screen
     async function revealVis(){
         // on load reveal
         d3.select(`.page-container`)
@@ -669,54 +683,53 @@ function buildFromGSheetData(settings) {
 
 
 
-
 ///////////////////////////////
 /////   HELPER METHODS    /////
 ///////////////////////////////
 
-const helpers= {
-    slugify: function (str) {
-        str = str.replace(/^\s+|\s+$/g, '').toLowerCase(); // trim           
-        const from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;",      // remove accents, swap ñ for n, etc
-            to   = "aaaaeeeeiiiioooouuuunc------"
-        for (var i=0, l=from.length ; i<l ; i++) {
-            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-        }
-        str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-            .replace(/\s+/g, '-') // collapse whitespace and replace by -
-            .replace(/-+/g, '-'); // collapse dashes
-        return str;
-    }, 
-    wrap: function(text, width, lineHeight, centerVertical = false) {
-        text.each(function() {
-            let text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                y = text.attr("y"),
-                x = text.attr("x"),
-                fontSize = parseFloat(text.style("font-size")),
-                dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
-
-            while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-
-                if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line = [word];
-                    tspan = text.append("tspan")
-                        .attr("x", x)
-                        .attr("y",  y)
-                        .attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                }                    
-            }            
-            if(centerVertical){
-                text.style("transform",  "translateY(-"+(8 * (lineNumber))+"px)")
+    const helpers= {
+        slugify: function (str) {
+            str = str.replace(/^\s+|\s+$/g, '').toLowerCase(); // trim           
+            const from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;",      // remove accents, swap ñ for n, etc
+                to   = "aaaaeeeeiiiioooouuuunc------"
+            for (var i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
             }
-        })
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+                .replace(/\s+/g, '-') // collapse whitespace and replace by -
+                .replace(/-+/g, '-'); // collapse dashes
+            return str;
+        }, 
+        wrap: function(text, width, lineHeight, centerVertical = false) {
+            text.each(function() {
+                let text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    y = text.attr("y"),
+                    x = text.attr("x"),
+                    fontSize = parseFloat(text.style("font-size")),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+
+                while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan")
+                            .attr("x", x)
+                            .attr("y",  y)
+                            .attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    }                    
+                }            
+                if(centerVertical){
+                    text.style("transform",  "translateY(-"+(8 * (lineNumber))+"px)")
+                }
+            })
+        }
     }
-}

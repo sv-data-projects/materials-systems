@@ -202,7 +202,7 @@ function buildFromGSheetData(settings) {
                 .attr('id', null)
                 .attr('class', null)
 
-            d3.selectAll(`#flow-label_${link.groupID}`) 
+            d3.selectAll(`#flow-label_${link.groupID}, #flow-label_${link.groupID} text`) 
                 .classed(`link-label  ${link.linkTypeClass} ${link.linkShapeClass} ${link.flowClass} ${link.systemClass} ${link.spatialClass}`, true)
                 .attr('font-family', null)
                 .attr('font-size', null)

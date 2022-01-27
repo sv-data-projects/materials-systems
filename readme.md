@@ -114,13 +114,28 @@ Further design notes concerning the webpage layout are detailed in further secti
 
 &nbsp;
 
-> **Narrative controls through individual scenes**
->
-> To enable detailed narratives to be told, the concept of individual 'scenes' is used that allow authors to control the 'view' of the diagram, and simultaneously add text to the content pane.  All scene content and configuration is done via the materials scene data table (in the Google Sheet). Some notes are provided below:
-> 
-> -  The visual control of the view of the SVG simply allows for elements to be hidden or faded, to highlight the parts of the system that are being discussed in the narrative. This is configured for each scene in the scene data data and controlled via a CSS selector (i.e. some knowledge of CSS and how all elements have been id'd and classed in the code is strongly recommended)
-> - A custom zoom function is called for each scene that will put the 'visible-selection' components of the scene in focus. A 'customZoom' configuration object (in the data table as JSON) can also be used, however this is unlikely to be used and not fully documented here) 
-> - **Once again, examining the configuration tables and what they produce on-screen is the best way to understand how they work**
+## 4. Narrative controls through individual scenes
+
+To enable detailed narratives to be told, the concept of individual 'scenes' is used that allow authors to control the 'view' of the diagram, and simultaneously add text to the content pane.  All scene content and configuration is done via the materials scene data table (in the Google Sheet). Some notes are provided below:
+ 
+ -  The visual control of the view of the SVG simply allows for elements to be hidden or faded, to highlight the parts of the system that are being discussed in the narrative. This is configured for each scene in the scene data data and controlled via a CSS selector (see below) 
+ - A custom zoom function is called for each scene that will put the 'visible-selection' components of the scene in focus. A 'customZoom' configuration object (in the data table as JSON) can also be used, however this is unlikely to be used and not fully documented here) 
+
+
+&nbsp;
+## 5. Using CSS classes to control the highlighted elements
+
+Knowledge of CSS and how all elements have been id'd and classed in the scene  configuration tables is strongly recommended for anyone trying to create scene views. Access to the configuration is made available though these tables to make it possible to customise scene views without needing to change any of tools code, however it must be stressed that this is no 'simple way' to create such a customisable process.
+
+The following are guidance notes:
+- There are various class fields in the node and link configuration tables that can be used to group those elements. Each of these are written as 'space separated' list with valid CSS names (i.e. in 'kebab case' without invalid characters). 
+- The code assigns all of these classes to the node/link elements (and their parent groups). This is what allows for those group to be selected for highlighting by CSS class name. 
+- More (unlimited) classes (groupings) can be added to highlight relationships.
+- Setting visible elements is done in the scene configuration table in the 'visible-selection' field. 
+- The visible-selection field **must be a valid CSS selector string or the scene visual highlighting feature will fail**. 
+- CSS selection strings can contain multiple classes and id's, which enables maximum flexibility. 
+
+> **Once again, examining the (working prototype) configuration tables and what they produce on-screen is the best way to understand how they work**
 
 &nbsp;
 
